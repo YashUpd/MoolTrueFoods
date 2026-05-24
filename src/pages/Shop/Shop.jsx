@@ -1,11 +1,31 @@
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { FaSearch, FaSlidersH, FaTimes, FaUndo } from 'react-icons/fa'
 import ProductCard from '../../components/ProductCard/ProductCard'
+import { productsAPI } from '../../api/client'
 import products from '../../data/products'
 import "./Shop.css"
 
 function Shop() {
+  const [productsList, setProductsList] = useState(products)
+  const [loadingProducts, setLoadingProducts] = useState(true)
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const res = await productsAPI.getAll()
+        if (res && res.data && res.data.length > 0) {
+          setProductsList(res.data)
+        }
+      } catch (e) {
+        console.error("Failed to fetch products from API, falling back to static data:", e)
+      } finally {
+        setLoadingProducts(false)
+      }
+    }
+    fetchProducts()
+  }, [])
+
   const [searchQuery, setSearchQuery] = useState('')
   const [selectedCategory, setSelectedCategory] = useState('All')
   const [maxPrice, setMaxPrice] = useState(1600)
@@ -16,12 +36,12 @@ function Shop() {
 
   // Find the actual price limits in data dynamically
   const maxProductPrice = useMemo(() => {
-    return Math.max(...products.map(p => p.price), 1500)
-  }, [])
+    return Math.max(...productsList.map(p => p.price), 1500)
+  }, [productsList])
 
   // Filtered and Sorted Products
   const filteredProducts = useMemo(() => {
-    let result = [...products]
+    let result = [...productsList]
 
     // Search query filter
     if (searchQuery.trim() !== '') {
@@ -52,7 +72,7 @@ function Shop() {
     }
 
     return result
-  }, [searchQuery, selectedCategory, maxPrice, sortBy])
+  }, [productsList, searchQuery, selectedCategory, maxPrice, sortBy])
 
   const handleResetFilters = () => {
     setSearchQuery('')
@@ -139,8 +159,8 @@ function Shop() {
                     {selectedCategory !== category && (
                       <span className="shop-category-count">
                         {category === 'All'
-                          ? products.length
-                          : products.filter(p => p.category === category).length}
+                          ? productsList.length
+                          : productsList.filter(p => p.category === category).length}
                       </span>
                     )}
                   </button>
@@ -178,7 +198,7 @@ function Shop() {
             {/* Top Sort & Filter Bar */}
             <div className="shop-top-bar">
               <div className="shop-showing-count">
-                Showing <span>{filteredProducts.length}</span> of <span>{products.length}</span> fresh products
+                Showing <span>{filteredProducts.length}</span> of <span>{productsList.length}</span> fresh products
               </div>
               
               <div className="shop-top-actions">
@@ -210,7 +230,9 @@ function Shop() {
             {/* Products Grid */}
             <motion.div layout className="shop-products-grid">
               <AnimatePresence mode="popLayout">
-                {filteredProducts.length === 0 ? (
+                {loadingProducts ? (
+                  <div className="admin-loading" style={{ gridColumn: '1/-1', py: 8 }}><div className="admin-spinner" /></div>
+                ) : filteredProducts.length === 0 ? (
                   <motion.div
                     key="empty"
                     initial={{ opacity: 0, scale: 0.9 }}
@@ -322,8 +344,8 @@ function Shop() {
                       {selectedCategory !== category && (
                         <span className="shop-category-count">
                           {category === 'All'
-                            ? products.length
-                            : products.filter(p => p.category === category).length}
+                            ? productsList.length
+                            : productsList.filter(p => p.category === category).length}
                         </span>
                       )}
                     </button>

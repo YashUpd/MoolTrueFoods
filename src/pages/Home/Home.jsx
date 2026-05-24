@@ -1,14 +1,33 @@
+import { useState, useEffect } from 'react'
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import Hero from "../../components/Hero/Hero";
 import CategorySection from "../../components/CategorySection/CategorySection";
 import ProductCard from "../../components/ProductCard/ProductCard";
+import { productsAPI } from "../../api/client";
 import products from "../../data/products";
 import "./Home.css";
 
 function Home() {
-  const wholeSpices = products.filter(p => p.category === "Whole Spices").slice(0, 4);
-  const blendedSpices = products.filter(p => p.category === "Blended Spices").slice(0, 4);
+  const [productsList, setProductsList] = useState(products)
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const res = await productsAPI.getAll()
+        if (res && res.data && res.data.length > 0) {
+          setProductsList(res.data)
+        }
+      } catch (e) {
+        console.error("Failed to fetch products for Home page:", e)
+      }
+    }
+    fetchProducts()
+  }, [])
+
+  const displayList = productsList.length > 0 ? productsList : products;
+  const wholeSpices = displayList.filter(p => p.category === "Whole Spices" || p.category === "Spices & Herbs").slice(0, 4);
+  const blendedSpices = displayList.filter(p => p.category === "Blended Spices" || p.category === "Ghee & Oils").slice(0, 4);
 
   const finestReasons = [
     {

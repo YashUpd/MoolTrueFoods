@@ -1,8 +1,9 @@
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useEffect } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { FaPlus, FaMinus, FaStar, FaShieldAlt, FaLeaf, FaTruck, FaAward } from 'react-icons/fa'
 import { useCart } from '../../context/CartContext'
+import { productsAPI } from '../../api/client'
 import products from '../../data/products'
 import ProductCard from '../../components/ProductCard/ProductCard'
 import "./ProductDetails.css";
@@ -13,18 +14,44 @@ function ProductDetails() {
   const [quantity, setQuantity] = useState(1)
   const [activeTab, setActiveTab] = useState('description')
 
-  // Find product in database
-  const product = useMemo(() => {
-    return products.find(item => item.id === parseInt(id))
+  const [product, setProduct] = useState(null)
+  const [productsList, setProductsList] = useState([])
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    const loadProductData = async () => {
+      try {
+        setLoading(true)
+        const [singleRes, listRes] = await Promise.all([
+          productsAPI.getOne(id),
+          productsAPI.getAll()
+        ])
+        if (singleRes && singleRes.data) {
+          setProduct(singleRes.data)
+        }
+        if (listRes && listRes.data) {
+          setProductsList(listRes.data)
+        }
+      } catch (e) {
+        console.error("Failed to fetch product dynamically, falling back to static:", e)
+        const staticProduct = products.find(item => item.id === parseInt(id))
+        setProduct(staticProduct)
+        setProductsList(products)
+      } finally {
+        setLoading(false)
+      }
+    }
+    loadProductData()
   }, [id])
 
   // Get related products (same category, excluding current product)
   const relatedProducts = useMemo(() => {
     if (!product) return []
-    return products
+    const sourceList = productsList.length > 0 ? productsList : products
+    return sourceList
       .filter(item => item.category === product.category && item.id !== product.id)
       .slice(0, 4)
-  }, [product])
+  }, [product, productsList])
 
   if (!product) {
     return (
