@@ -2,10 +2,29 @@ import Razorpay from 'razorpay'
 import crypto from 'crypto'
 import prisma from '../db.js'
 
-const razorpay = new Razorpay({
-  key_id: process.env.RAZORPAY_KEY_ID,
-  key_secret: process.env.RAZORPAY_KEY_SECRET,
-})
+// Warn if keys are missing on startup
+if (!process.env.RAZORPAY_KEY_ID || !process.env.RAZORPAY_KEY_SECRET) {
+  console.warn('⚠️ WARNING: RAZORPAY_KEY_ID and/or RAZORPAY_KEY_SECRET are not set in environment variables. Payment features will not function.')
+}
+
+let razorpay = null
+const getRazorpay = () => {
+  if (razorpay) return razorpay
+
+  const keyId = process.env.RAZORPAY_KEY_ID
+  const keySecret = process.env.RAZORPAY_KEY_SECRET
+
+  if (!keyId || !keySecret) {
+    throw new Error('Razorpay keys are not configured. Please set RAZORPAY_KEY_ID and RAZORPAY_KEY_SECRET in environment variables.')
+  }
+
+  razorpay = new Razorpay({
+    key_id: keyId,
+    key_secret: keySecret,
+  })
+
+  return razorpay
+}
 
 // POST /api/payments/create-order
 // Creates a Razorpay order and returns the order_id to frontend
@@ -23,7 +42,7 @@ export const createPaymentOrder = async (req, res) => {
       receipt: `receipt_${Date.now()}`,
     }
 
-    const order = await razorpay.orders.create(options)
+    const order = await getRazorpay().orders.create(options)
 
     res.json({
       success: true,
@@ -51,10 +70,15 @@ export const verifyPayment = async (req, res) => {
       internalOrderId, // our DB order ID
     } = req.body
 
+    const keySecret = process.env.RAZORPAY_KEY_SECRET
+    if (!keySecret) {
+      return res.status(500).json({ error: 'Razorpay secret key is not configured.' })
+    }
+
     // Create expected signature
     const body = razorpay_order_id + '|' + razorpay_payment_id
     const expectedSignature = crypto
-      .createHmac('sha256', process.env.RAZORPAY_KEY_SECRET)
+      .createHmac('sha256', keySecret)
       .update(body)
       .digest('hex')
 
