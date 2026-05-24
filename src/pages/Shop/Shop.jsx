@@ -1,8 +1,8 @@
 import { useState, useMemo } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { FaSearch, FaSlidersH, FaTimes, FaUndo } from 'react-icons/fa'
-import ProductCard from '../components/ProductCard'
-import products from '../data/products'
+import ProductCard from '../../components/ProductCard/ProductCard'
+import products from '../../data/products'
 import "./Shop.css"
 
 function Shop() {

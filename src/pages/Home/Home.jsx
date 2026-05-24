@@ -1,9 +1,9 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import Hero from "../components/Hero";
-import CategorySection from "../components/CategorySection";
-import ProductCard from "../components/ProductCard";
-import products from "../data/products";
+import Hero from "../../components/Hero/Hero";
+import CategorySection from "../../components/CategorySection/CategorySection";
+import ProductCard from "../../components/ProductCard/ProductCard";
+import products from "../../data/products";
 import "./Home.css";
 
 function Home() {

@@ -1,0 +1,89 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ─── Admin Users ──────────────────────────────────────────────────────────────
+model User {
+  id        Int      @id @default(autoincrement())
+  email     String   @unique
+  name      String
+  picture   String?
+  role      String   @default("admin") // "admin" | "superadmin"
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// ─── Products ─────────────────────────────────────────────────────────────────
+model Product {
+  id           Int         @id @default(autoincrement())
+  name         String
+  category     String
+  price        Float
+  weight       String
+  image        String      // Cloudinary CDN URL
+  imagePublicId String?    // Cloudinary public ID (for deletion)
+  description  String      @db.Text
+  sourcing     String
+  rating       Float       @default(4.5)
+  reviewsCount Int         @default(0)
+  nutrition    Json?       // JSON object: { calories, protein, carbs, fat, fiber }
+  isAvailable  Boolean     @default(true)
+  createdAt    DateTime    @default(now())
+  updatedAt    DateTime    @updatedAt
+
+  orderItems   OrderItem[]
+
+  @@map("products")
+}
+
+// ─── Orders ───────────────────────────────────────────────────────────────────
+model Order {
+  id              Int         @id @default(autoincrement())
+  orderNumber     String      @unique // e.g., "MTF-123456"
+  customerName    String
+  customerEmail   String
+  customerPhone   String
+  deliveryAddress String
+  city            String
+  pincode         String
+  state           String
+  totalAmount     Float
+  discountAmount  Float       @default(0)
+  deliveryFee     Float       @default(60)
+  gstAmount       Float       @default(0)
+  grandTotal      Float
+  paymentMethod   String      // "cod" | "razorpay"
+  paymentStatus   String      @default("pending") // "pending" | "paid" | "failed"
+  orderStatus     String      @default("pending") // "pending" | "confirmed" | "shipped" | "delivered" | "cancelled"
+  razorpayOrderId String?
+  razorpayPaymentId String?
+  createdAt       DateTime    @default(now())
+  updatedAt       DateTime    @updatedAt
+
+  orderItems      OrderItem[]
+
+  @@map("orders")
+}
+
+// ─── Order Items (Junction Table) ─────────────────────────────────────────────
+model OrderItem {
+  id        Int     @id @default(autoincrement())
+  quantity  Int
+  price     Float   // price at time of purchase
+
+  orderId   Int
+  order     Order   @relation(fields: [orderId], references: [id], onDelete: Cascade)
+
+  productId Int
+  product   Product @relation(fields: [productId], references: [id], onDelete: Restrict)
+
+  @@map("order_items")
+}

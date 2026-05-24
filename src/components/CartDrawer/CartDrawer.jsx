@@ -2,7 +2,7 @@ import { useRef, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import { FaTimes, FaPlus, FaMinus, FaTrashAlt, FaShoppingBag } from 'react-icons/fa'
-import { useCart } from '../context/CartContext'
+import { useCart } from '../../context/CartContext'
 import "./CartDrawer.css"
 
 function CartDrawer() {

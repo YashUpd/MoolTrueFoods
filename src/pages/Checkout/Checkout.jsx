@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import { FaLock, FaShoppingBasket, FaCheckCircle, FaLeaf, FaCreditCard, FaMoneyBillWave, FaMobileAlt } from 'react-icons/fa'
-import { useCart } from '../context/CartContext'
+import { useCart } from '../../context/CartContext'
 import "./Checkout.css"
 
 function Checkout() {

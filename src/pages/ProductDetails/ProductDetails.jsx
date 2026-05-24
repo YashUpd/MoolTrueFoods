@@ -2,9 +2,9 @@ import { useState, useMemo } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { FaPlus, FaMinus, FaStar, FaShieldAlt, FaLeaf, FaTruck, FaAward } from 'react-icons/fa'
-import { useCart } from '../context/CartContext'
-import products from '../data/products'
-import ProductCard from '../components/ProductCard'
+import { useCart } from '../../context/CartContext'
+import products from '../../data/products'
+import ProductCard from '../../components/ProductCard/ProductCard'
 import "./ProductDetails.css";
 
 function ProductDetails() {
