@@ -2,8 +2,8 @@ const products = [
   {
     id: 1,
     name: 'Organic A2 Gir Cow Ghee',
-    price: 1499,
-    image: 'https://images.unsplash.com/photo-1589733901241-5e391270fe0a?auto=format&fit=crop&q=80&w=800',
+    price: 849,
+    image: 'https://images.unsplash.com/photo-1622484211148-716598e0911a?auto=format&fit=crop&q=80&w=800',
     category: 'Ghee & Oils',
     description: 'Traditionally prepared A2 Gir Cow Ghee using the ancient Bilona method. Made from the pure milk of free-grazing Gir cows, this ghee is packed with nutritious goodness, healthy fats, and a rich, granular texture that enhances digestions and boosts immunity.',
     sourcing: 'Directly sourced from trusted gaushalas in Rajasthan, India',
@@ -21,7 +21,7 @@ const products = [
   {
     id: 2,
     name: 'Raw Wild Forest Honey',
-    price: 649,
+    price: 399,
     image: 'https://images.unsplash.com/photo-1587049352846-4a222e784d38?auto=format&fit=crop&q=80&w=800',
     category: 'Honey & Sweeteners',
     description: '100% pure, raw, and unfiltered forest honey collected sustainably by tribal communities from wild beehives in dense forests. This honey is rich in natural antioxidants, enzymes, and pollen, and possesses unique floral hints representing forest biodiversity.',
@@ -40,7 +40,7 @@ const products = [
   {
     id: 3,
     name: 'Cold Pressed Mustard Oil',
-    price: 249,
+    price: 199,
     image: 'https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?auto=format&fit=crop&q=80&w=800',
     category: 'Ghee & Oils',
     description: 'Extracting mustard oil using a traditional wooden Kachi Ghani press preserves its natural nutrients, intense aroma, and pungent flavor. Our organic mustard oil is cholesterol-free and highly rich in heart-healthy monounsaturated fatty acids (MUFAs).',
@@ -59,7 +59,7 @@ const products = [
   {
     id: 4,
     name: 'Organic Himalayan Pink Salt',
-    price: 129,
+    price: 99,
     image: 'https://images.unsplash.com/photo-1615485290382-441e4d049cb5?auto=format&fit=crop&q=80&w=800',
     category: 'Grains & Staples',
     description: 'Pure, unrefined Himalayan Pink Salt, hand-mined from ancient deposits at the foothills of the Himalayas. Containing 84 essential minerals and trace elements, it helps regulate water content in the body and acts as a healthier, mineral-dense alternative to table salt.',
@@ -79,7 +79,7 @@ const products = [
   {
     id: 5,
     name: 'Organic Premium Basmati Rice',
-    price: 279,
+    price: 179,
     image: 'https://images.unsplash.com/photo-1586201375761-83865001e31c?auto=format&fit=crop&q=80&w=800',
     category: 'Grains & Staples',
     description: 'Long-grain, hand-selected, aromatic Basmati Rice aged naturally for over a year to achieve a rich aroma and fluffy, non-sticky texture. It is completely pesticide-free and grown using traditional organic farming techniques watered by freshwater mountain rivers.',
@@ -98,7 +98,7 @@ const products = [
   {
     id: 6,
     name: 'Premium Kashmiri Almonds',
-    price: 899,
+    price: 599,
     image: 'https://images.unsplash.com/photo-1508061253366-f7da158b6d46?auto=format&fit=crop&q=80&w=800',
     category: 'Nuts & Seeds',
     description: 'Pure, organic, small-sized Kashmiri almonds, famously known for their high oil content and naturally sweet flavor. High in protein, healthy fats, vitamins, and minerals, these nuts are perfect for supporting brain function, cardiac health, and skin texture.',
@@ -117,7 +117,7 @@ const products = [
   {
     id: 7,
     name: 'Organic Lakadong Turmeric Powder',
-    price: 159,
+    price: 129,
     image: 'https://images.unsplash.com/photo-1615485500704-8e990f8300f7?auto=format&fit=crop&q=80&w=800',
     category: 'Spices & Herbs',
     description: 'Finely ground Lakadong Turmeric Powder, widely recognized for having the highest curcumin content (7-9%). Sourced directly from Meghalaya, it is chemical-free and extremely aromatic, delivering unmatched anti-inflammatory, antiseptic, and healing properties.',
@@ -136,7 +136,7 @@ const products = [
   {
     id: 8,
     name: 'Raw Organic Chia Seeds',
-    price: 229,
+    price: 189,
     image: 'https://images.unsplash.com/photo-1511225336969-923fbe2e68be?auto=format&fit=crop&q=80&w=800',
     category: 'Nuts & Seeds',
     description: 'Nutritious, organic raw Chia Seeds packed with high fiber, calcium, and essential Omega-3 fatty acids. Ideal for breakfast puddings, yogurt parfaits, or dynamic energy drinks, these tiny black seeds help promote gut health and weight management.',
@@ -155,7 +155,7 @@ const products = [
   {
     id: 9,
     name: 'Handmade Sugarcane Jaggery Blocks',
-    price: 179,
+    price: 99,
     image: 'https://images.unsplash.com/photo-1608686207856-001b95cf60ca?auto=format&fit=crop&q=80&w=800',
     category: 'Honey & Sweeteners',
     description: 'Delicious, completely unrefined organic sugarcane jaggery prepared in traditional iron cauldrons. Free from artificial sulfur and chemical clarifying agents, it acts as a mineral-rich alternative to refined white sugar.',
@@ -174,7 +174,7 @@ const products = [
   {
     id: 10,
     name: 'Organic Green Cardamom Pods',
-    price: 399,
+    price: 279,
     image: 'https://images.unsplash.com/photo-1599940824399-b87987ceb72a?auto=format&fit=crop&q=80&w=800',
     category: 'Spices & Herbs',
     description: 'Premium bold (8mm) Green Cardamom Pods, hand-picked for their vibrant green shade, rich aroma, and natural oils. Completely free from artificial coloring or chemical treatments, it is ideal for chai, biryanis, and traditional Indian sweets.',

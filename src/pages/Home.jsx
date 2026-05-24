@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 import Hero from "../components/Hero";
 import CategorySection from "../components/CategorySection";
 import ProductCard from "../components/ProductCard";
@@ -9,23 +10,23 @@ function Home() {
   const benefits = [
     {
       icon: <FaLeaf size={28} />,
-      title: "100% Organic",
-      desc: "Certified organic, pesticide-free produce",
-    },
-    {
-      icon: <FaTruck size={28} />,
-      title: "Fast Delivery",
-      desc: "Fresh delivered within 24 hours",
-    },
-    {
-      icon: <FaUndo size={28} />,
-      title: "Money Back",
-      desc: "7-day satisfaction guarantee",
+      title: "Origin & Sourcing",
+      desc: "Handpicked from the finest spice farms across India for authentic regional flavors.",
     },
     {
       icon: <FaCheckCircle size={28} />,
-      title: "Quality Assured",
-      desc: "Farm-fresh and carefully inspected",
+      title: "MoolTrue Advantage",
+      desc: "Processed with caution, 100% fungus-free, unadulterated, and packed with purity.",
+    },
+    {
+      icon: <FaUndo size={28} />,
+      title: "Flavour Profile",
+      desc: "Preserving natural essential oils for rich aroma and deep, vibrant colors.",
+    },
+    {
+      icon: <FaTruck size={28} />,
+      title: "Cooking Uses",
+      desc: "Perfect for tempering, marinades, curries, and elevating everyday meals.",
     },
   ];
 
@@ -50,7 +51,7 @@ function Home() {
       <Hero />
 
       {/* Benefits Section */}
-      <section className="px-4 sm:px-6 lg:px-8 py-12 sm:py-16 md:py-24 bg-gradient-to-b from-white to-green-50">
+      <section className="py-12 sm:py-16 md:py-24 bg-gradient-to-b from-white to-green-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
             {benefits.map((benefit, index) => (
@@ -78,7 +79,7 @@ function Home() {
       <CategorySection />
 
       {/* Featured Products Section */}
-      <section className="px-4 sm:px-6 lg:px-8 py-12 sm:py-16 md:py-24 bg-white">
+      <section className="py-12 sm:py-16 md:py-24 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Section Header */}
           <motion.div
@@ -88,11 +89,10 @@ function Home() {
             className="text-center mb-16"
           >
             <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-              Featured Organic Products
+              Best Sellers & Blends
             </h2>
             <p className="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed">
-              Handpicked from trusted farms. Fresh, healthy, and delicious. See
-              what's new this season.
+              Discover the most loved masalas and fresh spices, sourced with care to bring authentic flavors to your kitchen.
             </p>
             <div className="w-24 h-1 bg-gradient-to-r from-green-400 to-green-600 rounded-full mx-auto mt-8"></div>
           </motion.div>
@@ -118,15 +118,18 @@ function Home() {
             transition={{ duration: 0.8 }}
             className="flex justify-center mt-12 md:mt-16"
           >
-            <button className="bg-gradient-to-r from-green-500 to-green-600 text-white px-10 py-4 rounded-xl font-bold text-lg hover:shadow-lg hover:shadow-green-500/50 transform hover:scale-105 transition-all duration-300">
+            <Link
+              to="/shop"
+              className="bg-gradient-to-r from-green-500 to-green-600 text-white px-10 py-4 rounded-xl font-bold text-lg hover:shadow-lg hover:shadow-green-500/50 transform hover:scale-105 transition-all duration-300 text-center cursor-pointer inline-block"
+            >
               View All Products
-            </button>
+            </Link>
           </motion.div>
         </div>
       </section>
 
-      {/* Why Choose Us Section */}
-      <section className="px-4 sm:px-6 lg:px-8 py-12 sm:py-16 md:py-24 bg-gradient-to-b from-green-50 to-white">
+      {/* State-of-the-art Process Section */}
+      <section className="py-12 sm:py-16 md:py-24 bg-gradient-to-b from-green-50 to-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             {/* Left Content */}
@@ -136,24 +139,20 @@ function Home() {
               transition={{ duration: 0.8 }}
             >
               <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-                Why Choose{" "}
-                <span className="text-green-600">MoolTrue Foods?</span>
+                The Science of Pure <span className="text-green-600">Spices</span>
               </h2>
               <p className="text-lg text-gray-700 leading-relaxed mb-8">
-                We're committed to bringing you the freshest, most nutritious
-                organic produce directly from farms to your table. Every product
-                is carefully selected to ensure quality, freshness, and health
-                benefits.
+                Our manufacturing facilities ensure that every grain of spice that reaches your kitchen is 100% safe, aromatic, and packed with its natural oils. We follow a rigorous 5-step process:
               </p>
 
               <div className="space-y-4">
                 {[
-                  "100% certified organic products",
-                  "Direct from farms to you",
-                  "Same-day freshness guarantee",
-                  "Expert quality checks",
-                  "Sustainable farming practices",
-                  "Fair prices for farmers",
+                  "Advanced Cleaning & Grading",
+                  "ETM Sterilization for 100% safety",
+                  "Cold-grinding to preserve natural oils",
+                  "Zero added colors or preservatives",
+                  "FSSAI & ISO Certified Facilities",
+                  "Tamper-proof aroma-lock packaging",
                 ].map((item, index) => (
                   <div key={index} className="flex items-center gap-4">
                     <div className="w-8 h-8 bg-green-500 text-white rounded-full flex items-center justify-center font-bold text-sm flex-shrink-0">
@@ -173,13 +172,12 @@ function Home() {
               className="bg-gradient-to-br from-green-100 to-green-200 rounded-3xl p-12 shadow-xl"
             >
               <div className="text-center">
-                <div className="text-7xl mb-6">🌾</div>
+                <div className="text-7xl mb-6">⚙️</div>
                 <h3 className="text-2xl font-bold text-gray-800 mb-4">
-                  Farm Fresh Quality
+                  Uncompromised Purity
                 </h3>
                 <p className="text-gray-700 leading-relaxed">
-                  Grown with care, harvested fresh, delivered fast. That's the
-                  MoolTrue Foods promise.
+                  From rigorous lab testing to advanced processing technology. We bring the safest spices to India.
                 </p>
               </div>
             </motion.div>
@@ -188,7 +186,7 @@ function Home() {
       </section>
 
       {/* Testimonials Section */}
-      <section className="px-4 sm:px-6 lg:px-8 py-12 sm:py-16 md:py-24 bg-white">
+      <section className="py-12 sm:py-16 md:py-24 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Section Header */}
           <motion.div
@@ -232,56 +230,32 @@ function Home() {
         </div>
       </section>
 
-      {/* Newsletter Section */}
-      <section className="px-6 sm:px-8 py-16 md:py-24 bg-gradient-to-r from-green-500 to-green-600 text-white">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="max-w-4xl mx-auto text-center"
-        >
-          <h2 className="text-4xl md:text-5xl font-bold mb-6">
-            Fresh Recipes & Organic Tips
-          </h2>
-          <p className="text-xl text-green-100 mb-8 leading-relaxed">
-            Subscribe to get exclusive recipes, health tips, and special offers
-            delivered to your inbox every week.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
-            <input
-              type="email"
-              placeholder="Enter your email"
-              className="flex-1 px-6 py-4 rounded-xl text-black font-medium focus:outline-none focus:ring-2 focus:ring-white"
-            />
-            <button className="bg-white text-green-600 px-8 py-4 rounded-xl font-bold hover:shadow-lg transform hover:scale-105 transition-all duration-300">
-              Subscribe
-            </button>
-          </div>
-          <p className="text-green-100 text-sm mt-4">
-            We respect your privacy. Unsubscribe anytime.
-          </p>
-        </motion.div>
-      </section>
+
 
       {/* CTA Section */}
-      <section className="px-6 sm:px-8 py-16 md:py-24 bg-gradient-to-b from-white to-green-50">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="max-w-3xl mx-auto text-center"
-        >
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-            Start Your Organic Journey Today
-          </h2>
-          <p className="text-xl text-gray-600 mb-10 leading-relaxed">
-            Experience the difference of fresh, farm-to-table organic food. Your
-            first order comes with a special welcome discount.
-          </p>
-          <button className="bg-gradient-to-r from-green-500 to-green-600 text-white px-10 py-5 rounded-xl font-bold text-lg hover:shadow-lg hover:shadow-green-500/50 transform hover:scale-105 transition-all duration-300">
-            Shop Now & Get 20% Off
-          </button>
-        </motion.div>
+      <section className="py-12 sm:py-16 md:py-24 bg-gradient-to-b from-white to-green-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="max-w-3xl mx-auto text-center"
+          >
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+              Start Your Organic Journey Today
+            </h2>
+            <p className="text-xl text-gray-600 mb-10 leading-relaxed">
+              Experience the difference of fresh, farm-to-table organic food. Your
+              first order comes with a special welcome discount.
+            </p>
+            <Link
+              to="/shop"
+              className="bg-gradient-to-r from-green-500 to-green-600 text-white px-10 py-5 rounded-xl font-bold text-lg hover:shadow-lg hover:shadow-green-500/50 transform hover:scale-105 transition-all duration-300 text-center cursor-pointer inline-block"
+            >
+              Shop Now & Get 20% Off
+            </Link>
+          </motion.div>
+        </div>
       </section>
     </div>
   );

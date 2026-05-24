@@ -69,13 +69,14 @@ function ProductCard({ product }) {
             </span>
           </div>
 
-          <Link to={`/product/${product.id}`}>
-            <button className="bg-gradient-to-r from-green-500 to-green-600 text-white px-4 sm:px-6 py-2 sm:py-2.5 rounded-lg sm:rounded-xl text-sm sm:text-base font-semibold hover:shadow-lg hover:shadow-green-500/50 hover:scale-105 transform transition-all duration-300 flex items-center gap-1 sm:gap-2 group/btn whitespace-nowrap flex-shrink-0">
-              View
-              <span className="group-hover/btn:translate-x-1 transition-transform duration-300">
-                →
-              </span>
-            </button>
+          <Link 
+            to={`/product/${product.id}`}
+            className="bg-gradient-to-r from-green-500 to-green-600 text-white px-4 sm:px-6 py-2 sm:py-2.5 rounded-lg sm:rounded-xl text-sm sm:text-base font-semibold hover:shadow-lg hover:shadow-green-500/50 hover:scale-105 transform transition-all duration-300 flex items-center gap-1 sm:gap-2 group/btn whitespace-nowrap flex-shrink-0"
+          >
+            View
+            <span className="group-hover/btn:translate-x-1 transition-transform duration-300">
+              →
+            </span>
           </Link>
         </div>
 

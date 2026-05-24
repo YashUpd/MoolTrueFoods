@@ -14,7 +14,7 @@ function App() {
   return (
     <CartProvider>
       <BrowserRouter>
-        <div className="min-h-screen flex flex-col bg-white text-gray-900">
+        <div className="min-h-screen flex flex-col bg-white text-gray-900 overflow-x-hidden">
           <Navbar />
 
           <div className="flex-grow">

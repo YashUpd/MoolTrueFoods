@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import { FaFacebook, FaTwitter, FaInstagram, FaLinkedin } from 'react-icons/fa'
 
 function Footer() {
@@ -23,11 +24,11 @@ function Footer() {
 
       {/* Main Footer Content */}
       <div className='px-4 sm:px-6 lg:px-8 py-16'>
-        <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
+        <div className='max-w-7xl mx-auto'>
           <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-12'>
             {/* Brand Section */}
             <div>
-              <h2 className='text-3xl font-bold bg-gradient-to-r from-green-400 to-green-600 bg-clip-text text-transparent mb-4'>MoolTrue Foods</h2>
+              <h2 className='text-3xl font-bold bg-gradient-to-r from-green-400 to-green-600 bg-clip-text text-transparent mb-4'>MoolTrueFoods</h2>
               <p className='text-gray-400 mb-6 leading-relaxed'>
                 Your trusted source for 100% organic, farm-fresh foods delivered to your doorstep.
               </p>
@@ -55,24 +56,24 @@ function Footer() {
               </h3>
               <ul className='space-y-3'>
                 <li>
-                  <a href='#' className='text-gray-400 hover:text-green-400 transition-colors duration-300 flex items-center'>
+                  <Link to='/' className='text-gray-400 hover:text-green-400 transition-colors duration-300 flex items-center cursor-pointer'>
                     <span className='mr-2'>→</span>Home
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a href='#' className='text-gray-400 hover:text-green-400 transition-colors duration-300 flex items-center'>
+                  <Link to='/shop' className='text-gray-400 hover:text-green-400 transition-colors duration-300 flex items-center cursor-pointer'>
                     <span className='mr-2'>→</span>Shop
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a href='#' className='text-gray-400 hover:text-green-400 transition-colors duration-300 flex items-center'>
+                  <Link to='/about' className='text-gray-400 hover:text-green-400 transition-colors duration-300 flex items-center cursor-pointer'>
                     <span className='mr-2'>→</span>About
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a href='#' className='text-gray-400 hover:text-green-400 transition-colors duration-300 flex items-center'>
+                  <Link to='/contact' className='text-gray-400 hover:text-green-400 transition-colors duration-300 flex items-center cursor-pointer'>
                     <span className='mr-2'>→</span>Contact
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </div>

@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 
 function Hero() {
   const containerVariants = {
@@ -22,7 +23,7 @@ function Hero() {
   };
 
   return (
-    <section className="relative bg-gradient-to-br from-slate-900 via-slate-800 to-black text-white min-h-screen flex items-center justify-center px-4 sm:px-6 md:px-8 py-16 sm:py-20 md:py-20 overflow-hidden">
+    <section className="relative bg-gradient-to-br from-slate-900 via-slate-800 to-black text-white min-h-screen flex items-center justify-center px-4 sm:px-6 md:px-8 py-16 sm:py-20 md:py-24 overflow-hidden">
       {/* Background decoration */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute -top-40 -right-40 w-40 sm:w-60 md:w-80 h-40 sm:h-60 md:h-80 bg-green-600 opacity-10 rounded-full blur-3xl"></div>
@@ -64,12 +65,18 @@ function Hero() {
           variants={itemVariants}
           className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center px-2"
         >
-          <button className="bg-gradient-to-r from-green-500 to-green-600 text-white px-6 sm:px-8 md:px-10 py-2.5 sm:py-3 md:py-4 rounded-lg font-bold text-sm sm:text-base md:text-lg hover:shadow-lg hover:shadow-green-500/50 transform hover:scale-105 transition-all duration-300">
+          <Link
+            to="/shop"
+            className="bg-gradient-to-r from-green-500 to-green-600 text-white px-6 sm:px-8 md:px-10 py-2.5 sm:py-3 md:py-4 rounded-lg font-bold text-sm sm:text-base md:text-lg hover:shadow-lg hover:shadow-green-500/50 transform hover:scale-105 transition-all duration-300 text-center flex items-center justify-center cursor-pointer"
+          >
             Shop Now
-          </button>
-          <button className="border-2 border-green-400 text-green-400 px-6 sm:px-8 md:px-10 py-2.5 sm:py-3 md:py-4 rounded-lg font-bold text-sm sm:text-base md:text-lg hover:bg-green-400 hover:text-white transition-all duration-300">
+          </Link>
+          <Link
+            to="/about"
+            className="border-2 border-green-400 text-green-400 px-6 sm:px-8 md:px-10 py-2.5 sm:py-3 md:py-4 rounded-lg font-bold text-sm sm:text-base md:text-lg hover:bg-green-400 hover:text-white transition-all duration-300 text-center flex items-center justify-center cursor-pointer"
+          >
             Learn More
-          </button>
+          </Link>
         </motion.div>
 
         <motion.div

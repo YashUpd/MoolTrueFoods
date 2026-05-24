@@ -21,7 +21,7 @@ function Navbar() {
         {/* Logo */}
         <Link to="/" onClick={closeMenu}>
           <h1 className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-green-400 to-green-600 bg-clip-text text-transparent flex-shrink-0 cursor-pointer">
-            MoolTrue Foods
+            MoolTrueFoods
           </h1>
         </Link>
 

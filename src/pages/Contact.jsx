@@ -23,60 +23,62 @@ function Contact() {
   const contactInfo = [
     {
       icon: <FaPhone size={24} />,
-      title: "Phone",
-      info: "+91 9876543210",
-      subtext: "Mon-Sun 8AM-10PM",
+      title: "Customer Care",
+      info: "+91 1800-XXX-XXXX",
+      subtext: "Mon-Sat 9AM-6PM",
     },
     {
       icon: <FaEnvelope size={24} />,
-      title: "Email",
-      info: "support@mooltrue.com",
-      subtext: "Reply within 24 hours",
+      title: "Bulk / B2B Orders",
+      info: "b2b@mooltrue.com",
+      subtext: "For distributors & restaurants",
     },
     {
       icon: <FaMapMarkerAlt size={24} />,
-      title: "Address",
-      info: "Bangalore, India",
-      subtext: "Pan-India Delivery",
+      title: "Corporate Office",
+      info: "New Delhi, India",
+      subtext: "Global Headquarters",
     },
     {
-      icon: <FaClock size={24} />,
-      title: "Hours",
-      info: "8:00 AM - 10:00 PM",
-      subtext: "Available 7 days",
+      icon: <FaMapMarkerAlt size={24} />,
+      title: "Manufacturing Unit",
+      info: "Haryana, India",
+      subtext: "FSSAI Certified Facility",
     },
   ];
 
   return (
     <div className="bg-gradient-to-b from-white to-green-50">
       {/* Hero Section */}
-      <section className="relative px-6 sm:px-8 py-20 md:py-32 bg-gradient-to-br from-slate-900 via-green-900 to-slate-900 text-white overflow-hidden">
+      <section className="relative py-16 sm:py-20 md:py-32 bg-gradient-to-br from-slate-900 via-green-900 to-slate-900 text-white overflow-hidden">
         <div className="absolute inset-0 opacity-20">
           <div className="absolute -top-40 -right-40 w-80 h-80 bg-green-400 rounded-full blur-3xl"></div>
           <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-green-500 rounded-full blur-3xl"></div>
         </div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="relative z-10 max-w-4xl mx-auto text-center"
-        >
-          <h1 className="text-5xl md:text-7xl font-black mb-6">
-            Get in{" "}
-            <span className="bg-gradient-to-r from-green-300 to-green-500 bg-clip-text text-transparent">
-              Touch
-            </span>
-          </h1>
-          <p className="text-xl md:text-2xl text-green-100 leading-relaxed max-w-2xl mx-auto">
-            We'd love to hear from you. Send us a message and we'll respond as
-            soon as possible.
-          </p>
-        </motion.div>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="relative z-10 max-w-4xl mx-auto text-center"
+          >
+            <h1 className="text-5xl md:text-7xl font-black mb-6">
+              Get in{" "}
+              <span className="bg-gradient-to-r from-green-300 to-green-500 bg-clip-text text-transparent">
+                Touch
+              </span>
+            </h1>
+            <p className="text-xl md:text-2xl text-green-100 leading-relaxed max-w-2xl mx-auto">
+              We'd love to hear from you. Send us a message and we'll respond as
+              soon as possible.
+            </p>
+          </motion.div>
+        </div>
       </section>
 
       {/* Contact Info Cards */}
-      <section className="px-4 sm:px-6 lg:px-8 py-12 sm:py-16 md:py-20">
+      <section className="py-12 sm:py-16 md:py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
             {contactInfo.map((item, index) => (
@@ -102,7 +104,7 @@ function Contact() {
       </section>
 
       {/* Main Contact Section */}
-      <section className="px-4 sm:px-6 lg:px-8 py-12 sm:py-16 md:py-24">
+      <section className="py-12 sm:py-16 md:py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
             {/* Contact Form */}
@@ -119,7 +121,7 @@ function Contact() {
               <form onSubmit={handleSubmit} className="space-y-6">
                 {/* Name Field */}
                 <div>
-                  <label className="block mb-3 font-bold text-gray-900 text-sm uppercase tracking-wider">
+                  <label className="block text-xs font-bold text-gray-800 uppercase tracking-wider mb-2">
                     Full Name
                   </label>
                   <input
@@ -128,14 +130,14 @@ function Contact() {
                     value={formData.name}
                     onChange={handleChange}
                     placeholder="Enter your full name"
-                    className="w-full border-2 border-gray-200 px-5 py-4 rounded-xl focus:outline-none focus:border-green-500 focus:ring-2 focus:ring-green-200 transition-all duration-300 text-gray-900 placeholder-gray-500"
+                    className="w-full bg-gray-50 border-2 border-gray-100 focus:border-green-500 focus:bg-white rounded-xl py-3 px-4 text-sm font-medium transition-all duration-300 outline-none text-gray-900 placeholder-gray-400"
                     required
                   />
                 </div>
 
                 {/* Email Field */}
                 <div>
-                  <label className="block mb-3 font-bold text-gray-900 text-sm uppercase tracking-wider">
+                  <label className="block text-xs font-bold text-gray-800 uppercase tracking-wider mb-2">
                     Email Address
                   </label>
                   <input
@@ -144,14 +146,14 @@ function Contact() {
                     value={formData.email}
                     onChange={handleChange}
                     placeholder="Enter your email"
-                    className="w-full border-2 border-gray-200 px-5 py-4 rounded-xl focus:outline-none focus:border-green-500 focus:ring-2 focus:ring-green-200 transition-all duration-300 text-gray-900 placeholder-gray-500"
+                    className="w-full bg-gray-50 border-2 border-gray-100 focus:border-green-500 focus:bg-white rounded-xl py-3 px-4 text-sm font-medium transition-all duration-300 outline-none text-gray-900 placeholder-gray-400"
                     required
                   />
                 </div>
 
                 {/* Message Field */}
                 <div>
-                  <label className="block mb-3 font-bold text-gray-900 text-sm uppercase tracking-wider">
+                  <label className="block text-xs font-bold text-gray-800 uppercase tracking-wider mb-2">
                     Message
                   </label>
                   <textarea
@@ -160,7 +162,7 @@ function Contact() {
                     onChange={handleChange}
                     rows="5"
                     placeholder="Tell us how we can help..."
-                    className="w-full border-2 border-gray-200 px-5 py-4 rounded-xl focus:outline-none focus:border-green-500 focus:ring-2 focus:ring-green-200 transition-all duration-300 text-gray-900 placeholder-gray-500 resize-none"
+                    className="w-full bg-gray-50 border-2 border-gray-100 focus:border-green-500 focus:bg-white rounded-xl py-3 px-4 text-sm font-medium transition-all duration-300 outline-none text-gray-900 placeholder-gray-400 resize-none"
                     required
                   ></textarea>
                 </div>
@@ -196,60 +198,56 @@ function Contact() {
             >
               <div>
                 <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
-                  Why Contact Us?
+                  Partner With Us
                 </h2>
                 <p className="text-lg text-gray-700 leading-relaxed mb-6">
-                  We're here to help with any questions about our organic
-                  products, delivery, or anything else. Our dedicated support
-                  team is ready to assist you 24/7.
+                  Whether you are a retailer, distributor, or a restaurant owner looking for premium sterilized spices in bulk, we have dedicated programs for you. Reach out to our B2B team for special pricing and sample requests.
                 </p>
               </div>
 
               {/* FAQ Section */}
               <div className="bg-gradient-to-br from-green-50 to-white rounded-2xl p-8 border border-green-200">
                 <h3 className="text-2xl font-bold text-gray-900 mb-6">
-                  Quick Help
+                  Inquiry Types
                 </h3>
                 <div className="space-y-4">
                   <div>
                     <h4 className="font-bold text-gray-900 mb-2">
-                      📦 Delivery Issues
+                      🤝 Distributorship
                     </h4>
                     <p className="text-gray-600">
-                      We deliver fresh products within 24 hours. Track your
-                      order anytime.
+                      Join our pan-India network of authorized spice distributors.
                     </p>
                   </div>
                   <div>
                     <h4 className="font-bold text-gray-900 mb-2">
-                      🥬 Product Quality
+                      🏭 HoReCa & Bulk
                     </h4>
                     <p className="text-gray-600">
-                      All products are 100% organic, certified, and
-                      pesticide-free.
+                      Special wholesale packaging and pricing for Hotels, Restaurants, and Cafes.
                     </p>
                   </div>
                   <div>
                     <h4 className="font-bold text-gray-900 mb-2">
-                      💳 Payment & Returns
+                      🌍 Export Inquiries
                     </h4>
                     <p className="text-gray-600">
-                      Easy payment options and 7-day money-back guarantee.
+                      We export our ISO-certified spices globally. Contact our export division.
                     </p>
                   </div>
                   <div>
                     <h4 className="font-bold text-gray-900 mb-2">
-                      🌱 Bulk Orders
+                      🛒 Retail Customers
                     </h4>
                     <p className="text-gray-600">
-                      Special pricing for restaurants and institutions.
+                      For issues with your online retail order, please provide your Order ID in the message.
                     </p>
                   </div>
                 </div>
               </div>
 
               {/* Response Time */}
-              <div className="bg-gradient-to-br from-blue-50 to-white rounded-2xl p-8 border border-blue-200">
+              <div className="bg-gradient-to-br from-green-50 to-white rounded-2xl p-8 border border-green-100">
                 <h3 className="text-xl font-bold text-gray-900 mb-4">
                   ⏱️ Response Time
                 </h3>
@@ -277,7 +275,7 @@ function Contact() {
       </section>
 
       {/* Map Section */}
-      <section className="px-4 sm:px-6 lg:px-8 py-12 sm:py-16 md:py-24 bg-white">
+      <section className="py-12 sm:py-16 md:py-24 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -285,9 +283,9 @@ function Contact() {
             transition={{ duration: 0.8 }}
             className="text-center mb-12"
           >
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">Find Us</h2>
+            <h2 className="text-4xl font-bold text-gray-900 mb-4">Our Presence</h2>
             <p className="text-xl text-gray-600">
-              We're based in Bangalore but deliver across India
+              Headquartered in New Delhi, manufacturing in Haryana, delivering globally.
             </p>
           </motion.div>
 

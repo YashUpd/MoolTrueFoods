@@ -1,21 +1,39 @@
+import { Link } from "react-router-dom";
+
 function CategorySection() {
   const categories = [
     {
-      name: "Organic Vegetables",
-      icon: "🥬",
-      desc: "Fresh, pesticide-free veggies",
+      title: "Whole Spices",
+      icon: "🌶️",
+      count: "40+ Items",
+      color: "bg-red-100 text-red-600",
+      description: "Authentic whole spices for rich flavor bases"
     },
-    { name: "Spices & Grains", icon: "🌾", desc: "Premium quality staples" },
     {
-      name: "Healthy Snacks",
-      icon: "🥗",
-      desc: "Nutritious & delicious bites",
+      title: "Blended Spices",
+      icon: "🍛",
+      count: "25+ Items",
+      color: "bg-orange-100 text-orange-600",
+      description: "Perfectly balanced ready-to-cook masalas"
     },
-    { name: "Dairy & Milk", icon: "🥛", desc: "Pure & natural dairy products" },
+    {
+      title: "Ground Spices",
+      icon: "🧂",
+      count: "30+ Items",
+      color: "bg-yellow-100 text-yellow-600",
+      description: "Finely ground pure spices for everyday cooking"
+    },
+    {
+      title: "Nutritious Seeds",
+      icon: "🌱",
+      count: "15+ Items",
+      color: "bg-green-100 text-green-600",
+      description: "Healthy seeds and premium saffron"
+    },
   ];
 
   return (
-    <section className="relative bg-gradient-to-b from-white to-green-50 px-4 sm:px-6 lg:px-8 py-12 sm:py-16 md:py-24">
+    <section className="relative bg-gradient-to-b from-white to-green-50 py-12 sm:py-16 md:py-24">
       {/* Decorative background elements */}
       <div className="absolute top-0 right-0 w-40 sm:w-64 h-40 sm:h-64 bg-green-100 rounded-full opacity-30 blur-3xl"></div>
       <div className="absolute bottom-0 left-0 w-40 sm:w-64 h-40 sm:h-64 bg-green-100 rounded-full opacity-30 blur-3xl"></div>
@@ -81,9 +99,12 @@ function CategorySection() {
 
         {/* Bottom CTA */}
         <div className="text-center mt-12 sm:mt-16">
-          <button className="bg-gradient-to-r from-green-500 to-green-600 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg sm:rounded-xl font-bold text-sm sm:text-lg hover:shadow-lg hover:shadow-green-500/50 transform hover:scale-105 transition-all duration-300">
+          <Link
+            to="/shop"
+            className="bg-gradient-to-r from-green-500 to-green-600 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg sm:rounded-xl font-bold text-sm sm:text-lg hover:shadow-lg hover:shadow-green-500/50 transform hover:scale-105 transition-all duration-300 text-center cursor-pointer inline-block"
+          >
             Explore All Products
-          </button>
+          </Link>
         </div>
       </div>
     </section>
