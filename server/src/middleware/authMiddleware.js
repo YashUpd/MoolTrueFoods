@@ -33,3 +33,11 @@ export const protect = async (req, res, next) => {
     return res.status(500).json({ error: 'Authentication error.' })
   }
 }
+
+export const adminOnly = (req, res, next) => {
+  if (req.user && (req.user.role === 'admin' || req.user.role === 'superadmin')) {
+    next()
+  } else {
+    res.status(403).json({ error: 'Access denied. Administrative authorization required.' })
+  }
+}

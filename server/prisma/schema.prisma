@@ -10,15 +10,17 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-// ─── Admin Users ──────────────────────────────────────────────────────────────
+// ─── Users (Admins & Customers) ───────────────────────────────────────────────
 model User {
-  id        Int      @id @default(autoincrement())
-  email     String   @unique
-  name      String
-  picture   String?
-  role      String   @default("admin") // "admin" | "superadmin"
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id           Int      @id @default(autoincrement())
+  email        String   @unique
+  name         String
+  passwordHash String?  // Secure bcrypt hash for email/password users
+  picture      String?
+  role         String   @default("customer") // "customer" | "admin" | "superadmin"
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  orders       Order[]
 }
 
 // ─── Products ─────────────────────────────────────────────────────────────────
@@ -67,6 +69,9 @@ model Order {
   razorpayPaymentId String?
   createdAt       DateTime    @default(now())
   updatedAt       DateTime    @updatedAt
+
+  userId          Int?
+  user            User?       @relation(fields: [userId], references: [id], onDelete: SetNull)
 
   orderItems      OrderItem[]
 

@@ -2,11 +2,14 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { FaShoppingCart, FaBars, FaTimes } from "react-icons/fa";
 import { useCart } from "../../context/CartContext";
+import { useAuth } from "../../context/AuthContext";
 import "./Navbar.css";
 
 function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const { setIsCartOpen, cartCount } = useCart();
+  const { isAuthenticated, user, logout } = useAuth();
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -14,6 +17,7 @@ function Navbar() {
 
   const closeMenu = () => {
     setIsMenuOpen(false);
+    setIsDropdownOpen(false);
   };
 
   return (
@@ -87,6 +91,58 @@ function Navbar() {
                 </span>
               )}
             </button>
+
+            {/* User Dropdown */}
+            {isAuthenticated ? (
+              <div className="navbar-profile-wrap">
+                <button
+                  className="navbar-avatar-btn"
+                  onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                  aria-label="Toggle user menu"
+                >
+                  {user.picture ? (
+                    <img src={user.picture} alt={user.name} className="navbar-avatar-img" />
+                  ) : (
+                    <div className="navbar-avatar-initials">
+                      {user.name.split(' ').map(n => n[0]).join('').slice(0, 2).toUpperCase()}
+                    </div>
+                  )}
+                </button>
+                {isDropdownOpen && (
+                  <div className="navbar-dropdown">
+                    <div className="navbar-dropdown-header">
+                      <p className="navbar-dropdown-name">{user.name}</p>
+                      <p className="navbar-dropdown-email">{user.email}</p>
+                      <span className={`navbar-role-badge ${user.role}`}>
+                        {user.role}
+                      </span>
+                    </div>
+                    {(user.role === 'admin' || user.role === 'superadmin') && (
+                      <Link
+                        to="/admin"
+                        onClick={() => setIsDropdownOpen(false)}
+                        className="navbar-dropdown-item admin-link-item"
+                      >
+                        ⚙️ Admin Dashboard
+                      </Link>
+                    )}
+                    <button
+                      onClick={() => {
+                        logout()
+                        setIsDropdownOpen(false)
+                      }}
+                      className="navbar-dropdown-item logout-btn"
+                    >
+                      🚪 Sign Out
+                    </button>
+                  </div>
+                )}
+              </div>
+            ) : (
+              <Link to="/login" className="navbar-auth-btn">
+                Sign In
+              </Link>
+            )}
           </div>
         </div>
 
@@ -153,6 +209,44 @@ function Navbar() {
             >
               Contact
             </Link>
+
+            {/* Mobile Auth Items */}
+            {isAuthenticated ? (
+              <div className="navbar-mobile-auth-section">
+                <div className="navbar-mobile-user-card">
+                  <p className="navbar-mobile-user-name">👤 {user.name}</p>
+                  <p className="navbar-mobile-user-email">{user.email}</p>
+                </div>
+                {(user.role === 'admin' || user.role === 'superadmin') && (
+                  <Link
+                    to="/admin"
+                    onClick={closeMenu}
+                    className="navbar-mobile-link admin-link-item"
+                    style={{ borderTop: '1px solid var(--color-gray-100)' }}
+                  >
+                    ⚙️ Admin Dashboard
+                  </Link>
+                )}
+                <button
+                  onClick={() => {
+                    logout()
+                    closeMenu()
+                  }}
+                  className="navbar-mobile-logout-btn"
+                >
+                  🚪 Sign Out
+                </button>
+              </div>
+            ) : (
+              <Link
+                to="/login"
+                onClick={closeMenu}
+                className="navbar-mobile-link"
+                style={{ borderTop: '1px solid var(--color-gray-100)', color: 'var(--color-green-600)', fontWeight: 700 }}
+              >
+                👤 Sign In
+              </Link>
+            )}
           </div>
         </div>
       )}

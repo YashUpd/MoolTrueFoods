@@ -39,6 +39,10 @@ const request = async (method, endpoint, body = null, auth = false) => {
 export const authAPI = {
   googleLogin: (credential) =>
     request('POST', '/api/auth/google', { credential }),
+  signup: (name, email, password) =>
+    request('POST', '/api/auth/signup', { name, email, password }),
+  login: (email, password) =>
+    request('POST', '/api/auth/login', { email, password }),
   getMe: () =>
     request('GET', '/api/auth/me', null, true),
 }

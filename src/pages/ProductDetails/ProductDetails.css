@@ -75,7 +75,7 @@
 .details-panel-card {
   background-color: var(--color-white);
   border: 1px solid #f0fdf4;
-  border-radius: 2rem;
+  border-radius: var(--radius-2xl);
   padding: 1.5rem;
   box-shadow: var(--shadow-xl);
   display: grid;
@@ -106,7 +106,7 @@
 .details-img-showcase {
   width: 100%;
   position: relative;
-  border-radius: 1rem;
+  border-radius: var(--radius-xl);
   overflow: hidden;
   box-shadow: var(--shadow-md);
   border: 1px solid var(--color-gray-100);
@@ -464,7 +464,7 @@
 .details-tabs-inner {
   background-color: var(--color-white);
   border: 1px solid #f0fdf4;
-  border-radius: 2rem;
+  border-radius: var(--radius-2xl);
   box-shadow: var(--shadow-md);
   padding: 1.5rem;
 }

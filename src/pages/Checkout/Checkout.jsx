@@ -3,16 +3,18 @@ import { Link, useNavigate } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import { FaLock, FaShoppingBasket, FaCheckCircle, FaLeaf, FaCreditCard, FaMoneyBillWave, FaMobileAlt } from 'react-icons/fa'
 import { useCart } from '../../context/CartContext'
+import { useAuth } from '../../context/AuthContext'
 import "./Checkout.css"
 
 function Checkout() {
   const { cartItems, cartTotal, clearCart } = useCart()
+  const { user } = useAuth()
   const navigate = useNavigate()
 
   // Form Fields
   const [formData, setFormData] = useState({
-    fullName: '',
-    email: '',
+    fullName: user ? user.name : '',
+    email: user ? user.email : '',
     phone: '',
     address: '',
     city: '',
