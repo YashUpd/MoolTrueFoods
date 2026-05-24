@@ -20,7 +20,7 @@ function CategorySection() {
       <div className="absolute top-0 right-0 w-40 sm:w-64 h-40 sm:h-64 bg-green-100 rounded-full opacity-30 blur-3xl"></div>
       <div className="absolute bottom-0 left-0 w-40 sm:w-64 h-40 sm:h-64 bg-green-100 rounded-full opacity-30 blur-3xl"></div>
 
-      <div className="relative z-10 max-w-6xl mx-auto">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center mb-12 sm:mb-16">
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-black mb-3 sm:mb-4 text-gray-900">

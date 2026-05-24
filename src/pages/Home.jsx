@@ -3,7 +3,7 @@ import Hero from "../components/Hero";
 import CategorySection from "../components/CategorySection";
 import ProductCard from "../components/ProductCard";
 import products from "../data/products";
-import { FaCheckCircle, FaLeaf, FaTruck, FaRefresh } from "react-icons/fa";
+import { FaCheckCircle, FaLeaf, FaTruck, FaUndo } from "react-icons/fa";
 
 function Home() {
   const benefits = [
@@ -18,7 +18,7 @@ function Home() {
       desc: "Fresh delivered within 24 hours",
     },
     {
-      icon: <FaRefresh size={28} />,
+      icon: <FaUndo size={28} />,
       title: "Money Back",
       desc: "7-day satisfaction guarantee",
     },
@@ -50,8 +50,8 @@ function Home() {
       <Hero />
 
       {/* Benefits Section */}
-      <section className="px-6 sm:px-8 py-16 md:py-24 bg-gradient-to-b from-white to-green-50">
-        <div className="max-w-6xl mx-auto">
+      <section className="px-4 sm:px-6 lg:px-8 py-12 sm:py-16 md:py-24 bg-gradient-to-b from-white to-green-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
             {benefits.map((benefit, index) => (
               <motion.div
@@ -78,8 +78,8 @@ function Home() {
       <CategorySection />
 
       {/* Featured Products Section */}
-      <section className="px-6 sm:px-8 py-16 md:py-24 bg-white">
-        <div className="max-w-6xl mx-auto">
+      <section className="px-4 sm:px-6 lg:px-8 py-12 sm:py-16 md:py-24 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Section Header */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -126,8 +126,8 @@ function Home() {
       </section>
 
       {/* Why Choose Us Section */}
-      <section className="px-6 sm:px-8 py-16 md:py-24 bg-gradient-to-b from-green-50 to-white">
-        <div className="max-w-6xl mx-auto">
+      <section className="px-4 sm:px-6 lg:px-8 py-12 sm:py-16 md:py-24 bg-gradient-to-b from-green-50 to-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             {/* Left Content */}
             <motion.div
@@ -188,8 +188,8 @@ function Home() {
       </section>
 
       {/* Testimonials Section */}
-      <section className="px-6 sm:px-8 py-16 md:py-24 bg-white">
-        <div className="max-w-6xl mx-auto">
+      <section className="px-4 sm:px-6 lg:px-8 py-12 sm:py-16 md:py-24 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Section Header */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}

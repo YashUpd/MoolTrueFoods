@@ -76,8 +76,8 @@ function Contact() {
       </section>
 
       {/* Contact Info Cards */}
-      <section className="px-6 sm:px-8 py-16 md:py-20">
-        <div className="max-w-6xl mx-auto">
+      <section className="px-4 sm:px-6 lg:px-8 py-12 sm:py-16 md:py-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
             {contactInfo.map((item, index) => (
               <motion.div
@@ -102,8 +102,8 @@ function Contact() {
       </section>
 
       {/* Main Contact Section */}
-      <section className="px-6 sm:px-8 py-16 md:py-24">
-        <div className="max-w-6xl mx-auto">
+      <section className="px-4 sm:px-6 lg:px-8 py-12 sm:py-16 md:py-24">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
             {/* Contact Form */}
             <motion.div
@@ -277,8 +277,8 @@ function Contact() {
       </section>
 
       {/* Map Section */}
-      <section className="px-6 sm:px-8 py-16 md:py-24 bg-white">
-        <div className="max-w-6xl mx-auto">
+      <section className="px-4 sm:px-6 lg:px-8 py-12 sm:py-16 md:py-24 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}

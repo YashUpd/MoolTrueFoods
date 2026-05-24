@@ -60,8 +60,8 @@ function About() {
       </section>
 
       {/* Our Story Section */}
-      <section className="px-6 sm:px-8 py-16 md:py-24">
-        <div className="max-w-6xl mx-auto">
+      <section className="px-4 sm:px-6 lg:px-8 py-12 sm:py-16 md:py-24">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -120,8 +120,8 @@ function About() {
       </section>
 
       {/* Values Section */}
-      <section className="px-6 sm:px-8 py-16 md:py-24 bg-white">
-        <div className="max-w-6xl mx-auto">
+      <section className="px-4 sm:px-6 lg:px-8 py-12 sm:py-16 md:py-24 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -162,8 +162,8 @@ function About() {
       </section>
 
       {/* Mission & Vision */}
-      <section className="px-6 sm:px-8 py-16 md:py-24">
-        <div className="max-w-6xl mx-auto">
+      <section className="px-4 sm:px-6 lg:px-8 py-12 sm:py-16 md:py-24">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <motion.div
               initial={{ opacity: 0, x: -20 }}
@@ -202,8 +202,8 @@ function About() {
       </section>
 
       {/* Team Section */}
-      <section className="px-6 sm:px-8 py-16 md:py-24 bg-white">
-        <div className="max-w-6xl mx-auto">
+      <section className="px-4 sm:px-6 lg:px-8 py-12 sm:py-16 md:py-24 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -242,7 +242,7 @@ function About() {
       </section>
 
       {/* CTA Section */}
-      <section className="px-6 sm:px-8 py-16 md:py-24 bg-gradient-to-r from-green-500 to-green-600 text-white">
+      <section className="px-4 sm:px-6 lg:px-8 py-16 sm:py-20 md:py-24 bg-gradient-to-r from-green-500 to-green-600 text-white">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}

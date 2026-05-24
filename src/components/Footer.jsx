@@ -4,7 +4,7 @@ function Footer() {
   return (
     <footer className='bg-gradient-to-r from-slate-900 to-slate-800 text-white'>
       {/* Newsletter Section */}
-      <div className='bg-gradient-to-r from-green-500 to-green-600 px-6 sm:px-8 py-12'>
+      <div className='bg-gradient-to-r from-green-500 to-green-600 px-4 sm:px-6 lg:px-8 py-12'>
         <div className='max-w-4xl mx-auto text-center'>
           <h3 className='text-2xl sm:text-3xl font-bold mb-3'>Subscribe to Our Newsletter</h3>
           <p className='text-green-100 mb-6'>Get exclusive deals, organic product updates, and healthy recipes delivered to your inbox.</p>
@@ -22,8 +22,8 @@ function Footer() {
       </div>
 
       {/* Main Footer Content */}
-      <div className='px-6 sm:px-8 py-16'>
-        <div className='max-w-6xl mx-auto'>
+      <div className='px-4 sm:px-6 lg:px-8 py-16'>
+        <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
           <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-12'>
             {/* Brand Section */}
             <div>
