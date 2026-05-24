@@ -37,6 +37,8 @@ function ProtectedCheckoutRoute({ children }) {
 }
 
 function App() {
+  console.log("Vite Google Client ID Loaded:", import.meta.env.VITE_GOOGLE_CLIENT_ID);
+  
   return (
     <GoogleOAuthProvider clientId={import.meta.env.VITE_GOOGLE_CLIENT_ID || ''}>
       <AuthProvider>
