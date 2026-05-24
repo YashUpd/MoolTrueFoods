@@ -40,6 +40,15 @@ app.get('/health', (req, res) => {
   res.json({ status: 'ok', timestamp: new Date().toISOString() })
 })
 
+// ─── API Welcome Route ────────────────────────────────────────────────────────
+app.get('/', (req, res) => {
+  res.json({
+    message: 'Welcome to the MoolTrue Foods API',
+    status: 'online',
+    version: '1.0.0',
+  })
+})
+
 // ─── API Routes ───────────────────────────────────────────────────────────────
 app.use('/api/auth', authRoutes)
 app.use('/api/products', productRoutes)
