@@ -1,0 +1,12 @@
+.app-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--color-white);
+  color: var(--color-gray-900);
+  overflow-x: hidden;
+}
+
+.app-main {
+  flex-grow: 1;
+}

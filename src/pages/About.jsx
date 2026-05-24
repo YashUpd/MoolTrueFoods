@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { FaLeaf, FaTruck, FaHeart, FaAward } from "react-icons/fa";
+import "./About.css";
 
 function About() {
   const values = [
@@ -34,79 +35,70 @@ function About() {
   ];
 
   return (
-    <div className="bg-gradient-to-b from-white to-green-50">
+    <div className="about-page">
       {/* Hero Section */}
-      <section className="relative py-16 sm:py-20 md:py-32 bg-gradient-to-br from-slate-900 via-green-900 to-slate-900 text-white overflow-hidden">
-        <div className="absolute inset-0 opacity-20">
-          <div className="absolute -top-40 -right-40 w-80 h-80 bg-green-400 rounded-full blur-3xl"></div>
-          <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-green-500 rounded-full blur-3xl"></div>
-        </div>
+      <section className="about-hero">
+        <div className="about-hero-decor-1"></div>
+        <div className="about-hero-decor-2"></div>
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="about-hero-content">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="relative z-10 max-w-4xl mx-auto text-center"
           >
-            <h1 className="text-5xl md:text-7xl font-black mb-6">
-              About{" "}
-              <span className="bg-gradient-to-r from-green-300 to-green-500 bg-clip-text text-transparent">
-                MoolTrue Foods
-              </span>
+            <h1 className="about-hero-title">
+              Our <span className="about-hero-title-green">Story</span>
             </h1>
-            <p className="text-xl md:text-2xl text-green-100 leading-relaxed max-w-2xl mx-auto">
-              From Raw Spice to Your Kitchen: Delivering Pure Authentic Flavours Since 1982
+            <div className="about-hero-underline"></div>
+            <p className="about-hero-desc">
+              Since 1982, MoolTrue Foods has been on a mission to bring 100% pure, authentic Indian spices to your kitchen.
             </p>
           </motion.div>
         </div>
       </section>
 
       {/* Our Story Section */}
-      <section className="py-12 sm:py-16 md:py-24">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="about-section">
+        <div className="about-section-container">
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
-            className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center"
+            className="about-grid-two-col"
           >
-            <div className="order-2 md:order-1">
-              <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+            <div className="about-order-mobile-2">
+              <h2 className="about-section-title">
                 Our Journey
               </h2>
-              <p className="text-lg text-gray-700 leading-relaxed mb-4">
+              <p className="about-section-desc">
                 MoolTrue Foods was born from a simple belief: that Indian spices should reach the world in their purest, most authentic form. Founded in 1982, we started as a small local mill and have grown into a premier spice manufacturer.
               </p>
-              <p className="text-lg text-gray-700 leading-relaxed mb-4">
+              <p className="about-section-desc">
                 Today, our spices are processed in state-of-the-art FSSAI & ISO certified facilities. We meticulously clean, grade, roast, and cold-grind our spices to ensure the natural essential oils are preserved, providing you with unmatched flavor and aroma.
               </p>
-              <p className="text-lg text-gray-700 leading-relaxed">
+              <p className="about-section-desc">
                 Our commitment is unwavering: 100% pure, unadulterated, and sterilized spices that bring the rich culinary heritage of India straight to your kitchen.
               </p>
             </div>
-            <div className="order-1 md:order-2">
-              <div className="bg-gradient-to-br from-green-100 to-green-200 rounded-3xl p-8 shadow-2xl">
-                <div className="text-6xl text-center mb-4">🏭</div>
-                <h3 className="text-2xl font-bold text-gray-800 text-center mb-4">
+            <div className="about-order-mobile-1">
+              <div className="about-legacy-card">
+                <div className="about-legacy-icon">🏭</div>
+                <h3 className="about-legacy-title">
                   Legacy Since 1982
                 </h3>
-                <div className="bg-white rounded-2xl p-6 space-y-3">
-                  <p className="text-gray-700">
-                    <span className="font-bold text-green-600">40+ Years</span>{" "}
-                    of Excellence
+                <div className="about-legacy-list">
+                  <p className="about-legacy-item">
+                    <strong>40+ Years</strong> of Excellence
                   </p>
-                  <p className="text-gray-700">
-                    <span className="font-bold text-green-600">FSSAI & ISO</span>{" "}
-                    Certified
+                  <p className="about-legacy-item">
+                    <strong>FSSAI & ISO</strong> Certified
                   </p>
-                  <p className="text-gray-700">
-                    <span className="font-bold text-green-600">5+</span>{" "}
-                    Global Markets
+                  <p className="about-legacy-item">
+                    <strong>5+</strong> Global Markets
                   </p>
-                  <p className="text-gray-700">
-                    <span className="font-bold text-green-600">100%</span>{" "}
-                    Pure & Sterilized
+                  <p className="about-legacy-item">
+                    <strong>100%</strong> Pure & Sterilized
                   </p>
                 </div>
               </div>
@@ -116,39 +108,39 @@ function About() {
       </section>
 
       {/* Values Section */}
-      <section className="py-12 sm:py-16 md:py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="about-section" style={{ backgroundColor: 'var(--color-white)' }}>
+        <div className="about-section-container">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="text-center mb-16"
+            className="about-center-header"
           >
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+            <h2 className="about-center-title">
               Our Core Values
             </h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+            <p className="about-center-subtitle">
               These principles guide every decision we make
             </p>
-            <div className="w-24 h-1 bg-gradient-to-r from-green-400 to-green-600 rounded-full mx-auto mt-6"></div>
+            <div className="about-center-underline"></div>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="about-values-grid">
             {values.map((value, index) => (
               <motion.div
                 key={index}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: index * 0.1 }}
-                className="group bg-gradient-to-br from-green-50 to-white rounded-2xl p-8 shadow-md hover:shadow-xl hover:-translate-y-2 transition-all duration-500 border border-green-100"
+                className="about-value-card"
               >
-                <div className="text-green-600 mb-4 group-hover:scale-110 group-hover:text-green-500 transition-all duration-300">
+                <div className="about-value-icon">
                   {value.icon}
                 </div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-3">
+                <h3 className="about-value-title">
                   {value.title}
                 </h3>
-                <p className="text-gray-600 leading-relaxed">
+                <p className="about-value-desc">
                   {value.description}
                 </p>
               </motion.div>
@@ -158,19 +150,19 @@ function About() {
       </section>
 
       {/* Mission & Vision */}
-      <section className="py-12 sm:py-16 md:py-24">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <section className="about-section">
+        <div className="about-section-container">
+          <div className="about-split-grid">
             <motion.div
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8 }}
-              className="bg-gradient-to-br from-green-50 to-green-100 rounded-3xl p-10 border-2 border-green-200"
+              className="about-mission-card"
             >
-              <h3 className="text-3xl font-bold text-gray-900 mb-4">
+              <h3 className="about-split-title">
                 🎯 Our Mission
               </h3>
-              <p className="text-lg text-gray-700 leading-relaxed">
+              <p className="about-split-desc">
                 To ensure that the authentic taste of Indian spices reaches every household in its purest and safest form. We aim to revolutionize the spice industry through advanced sterilization technologies and strict quality control without compromising on natural aroma.
               </p>
             </motion.div>
@@ -179,12 +171,12 @@ function About() {
               initial={{ opacity: 0, x: 20 }}
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8 }}
-              className="bg-gradient-to-br from-green-100 to-green-50 rounded-3xl p-10 border-2 border-green-200"
+              className="about-vision-card"
             >
-              <h3 className="text-3xl font-bold text-gray-900 mb-4">
+              <h3 className="about-split-title">
                 🌍 Our Vision
               </h3>
-              <p className="text-lg text-gray-700 leading-relaxed">
+              <p className="about-split-desc">
                 To be the world's most trusted name in Indian Spices by setting global benchmarks in purity, hygiene, and authentic flavors, ensuring that culinary traditions are passed down safely for generations.
               </p>
             </motion.div>
@@ -193,39 +185,39 @@ function About() {
       </section>
 
       {/* Team Section */}
-      <section className="py-12 sm:py-16 md:py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="about-section" style={{ backgroundColor: 'var(--color-white)' }}>
+        <div className="about-section-container">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="text-center mb-16"
+            className="about-center-header"
           >
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+            <h2 className="about-center-title">
               Meet Our Team
             </h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+            <p className="about-center-subtitle">
               Passionate people dedicated to your health
             </p>
-            <div className="w-24 h-1 bg-gradient-to-r from-green-400 to-green-600 rounded-full mx-auto mt-6"></div>
+            <div className="about-center-underline"></div>
           </motion.div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="about-team-grid">
             {team.map((member, index) => (
               <motion.div
                 key={index}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: index * 0.1 }}
-                className="group text-center"
+                className="about-team-card"
               >
-                <div className="bg-gradient-to-br from-green-100 to-green-50 rounded-2xl p-8 mb-4 group-hover:shadow-xl transition-all duration-300 transform group-hover:scale-105">
-                  <div className="text-6xl mb-4">{member.emoji}</div>
+                <div className="about-team-img-container">
+                  <div className="about-team-emoji">{member.emoji}</div>
                 </div>
-                <h3 className="text-xl font-bold text-gray-900">
+                <h3 className="about-team-name">
                   {member.name}
                 </h3>
-                <p className="text-green-600 font-semibold">{member.role}</p>
+                <p className="about-team-role">{member.role}</p>
               </motion.div>
             ))}
           </div>
@@ -233,23 +225,23 @@ function About() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-12 sm:py-16 md:py-24 bg-gradient-to-r from-green-500 to-green-600 text-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="about-cta">
+        <div className="about-section-container">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="max-w-3xl mx-auto text-center"
+            className="about-cta-content"
           >
-            <h2 className="text-4xl md:text-5xl font-bold mb-6">
+            <h2 className="about-cta-title">
               Join the Organic Revolution
             </h2>
-            <p className="text-xl mb-8 text-green-100">
+            <p className="about-cta-desc">
               Experience the difference of fresh, farm-to-table organic food
             </p>
             <Link
               to="/shop"
-              className="bg-white text-green-600 px-8 py-4 rounded-xl font-bold text-lg hover:shadow-2xl transform hover:scale-105 transition-all duration-300 text-center cursor-pointer inline-block"
+              className="about-cta-btn"
             >
               Shop Now
             </Link>

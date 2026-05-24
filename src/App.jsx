@@ -9,15 +9,16 @@ import ProductDetails from './pages/ProductDetails'
 import Checkout from './pages/Checkout'
 import { CartProvider } from './context/CartContext'
 import CartDrawer from './components/CartDrawer'
+import './App.css'
 
 function App() {
   return (
     <CartProvider>
       <BrowserRouter>
-        <div className="min-h-screen flex flex-col bg-white text-gray-900 overflow-x-hidden">
+        <div className="app-container">
           <Navbar />
 
-          <div className="flex-grow">
+          <div className="app-main">
             <Routes>
               <Route path='/' element={<Home />} />
               <Route path='/shop' element={<Shop />} />

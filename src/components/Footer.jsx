@@ -1,143 +1,153 @@
 import { Link } from 'react-router-dom'
-import { FaFacebook, FaTwitter, FaInstagram, FaLinkedin } from 'react-icons/fa'
+import { FaFacebook, FaInstagram, FaLinkedin, FaYoutube, FaPinterest, FaMapMarkerAlt, FaEnvelope, FaPhone } from 'react-icons/fa'
+import "./Footer.css"
 
 function Footer() {
   return (
-    <footer className='bg-gradient-to-r from-slate-900 to-slate-800 text-white'>
-      {/* Newsletter Section */}
-      <div className='bg-gradient-to-r from-green-500 to-green-600 px-4 sm:px-6 lg:px-8 py-12'>
-        <div className='max-w-4xl mx-auto text-center'>
-          <h3 className='text-2xl sm:text-3xl font-bold mb-3'>Subscribe to Our Newsletter</h3>
-          <p className='text-green-100 mb-6'>Get exclusive deals, organic product updates, and healthy recipes delivered to your inbox.</p>
-          <div className='flex flex-col sm:flex-row gap-3 max-w-md mx-auto'>
-            <input
-              type='email'
-              placeholder='Enter your email'
-              className='flex-1 px-4 py-3 rounded-lg text-black font-medium focus:outline-none focus:ring-2 focus:ring-green-400'
-            />
-            <button className='bg-slate-900 text-green-400 px-6 py-3 rounded-lg font-bold hover:bg-slate-800 transition-colors duration-300'>
-              Subscribe
-            </button>
-          </div>
-        </div>
-      </div>
-
+    <footer className='footer'>
       {/* Main Footer Content */}
-      <div className='px-4 sm:px-6 lg:px-8 py-16'>
-        <div className='max-w-7xl mx-auto'>
-          <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-12'>
-            {/* Brand Section */}
-            <div>
-              <h2 className='text-3xl font-bold bg-gradient-to-r from-green-400 to-green-600 bg-clip-text text-transparent mb-4'>MoolTrueFoods</h2>
-              <p className='text-gray-400 mb-6 leading-relaxed'>
-                Your trusted source for 100% organic, farm-fresh foods delivered to your doorstep.
+      <div className='footer-inner'>
+        <div className='footer-container'>
+          <div className='footer-grid'>
+            
+            {/* Column 1: Brand Section */}
+            <div className="footer-brand">
+              <Link to="/" className="footer-brand-logo">
+                <span>
+                  <span className="text-blue-800">Mool</span>True<span className="text-orange-500">Foods</span>
+                </span>
+              </Link>
+              <p className='footer-brand-desc'>
+                MoolTrue Spices delivers quality whole spices, powdered spices, blended masalas, and seasonings, ensuring freshness and authentic flavor in every dish.
               </p>
-              <div className='flex gap-4'>
-                <a href='#' className='w-10 h-10 bg-slate-700 rounded-full flex items-center justify-center hover:bg-green-500 transition-colors duration-300'>
-                  <FaFacebook size={18} />
-                </a>
-                <a href='#' className='w-10 h-10 bg-slate-700 rounded-full flex items-center justify-center hover:bg-green-500 transition-colors duration-300'>
-                  <FaTwitter size={18} />
-                </a>
-                <a href='#' className='w-10 h-10 bg-slate-700 rounded-full flex items-center justify-center hover:bg-green-500 transition-colors duration-300'>
-                  <FaInstagram size={18} />
-                </a>
-                <a href='#' className='w-10 h-10 bg-slate-700 rounded-full flex items-center justify-center hover:bg-green-500 transition-colors duration-300'>
-                  <FaLinkedin size={18} />
-                </a>
+              <div className='footer-socials'>
+                <a href='#' className='footer-social-icon text-blue-600'><FaFacebook size={24} /></a>
+                <a href='#' className='footer-social-icon text-pink-600'><FaInstagram size={24} /></a>
+                <a href='#' className='footer-social-icon text-blue-700'><FaLinkedin size={24} /></a>
+                <a href='#' className='footer-social-icon text-red-600'><FaYoutube size={24} /></a>
+                <a href='#' className='footer-social-icon text-red-700'><FaPinterest size={24} /></a>
               </div>
             </div>
 
-            {/* Quick Links */}
+            {/* Column 2: Products */}
             <div>
-              <h3 className='text-xl font-bold mb-6 flex items-center'>
-                <span className='w-1 h-6 bg-green-500 mr-3 rounded'></span>
-                Quick Links
-              </h3>
-              <ul className='space-y-3'>
-                <li>
-                  <Link to='/' className='text-gray-400 hover:text-green-400 transition-colors duration-300 flex items-center cursor-pointer'>
-                    <span className='mr-2'>→</span>Home
-                  </Link>
-                </li>
-                <li>
-                  <Link to='/shop' className='text-gray-400 hover:text-green-400 transition-colors duration-300 flex items-center cursor-pointer'>
-                    <span className='mr-2'>→</span>Shop
-                  </Link>
-                </li>
-                <li>
-                  <Link to='/about' className='text-gray-400 hover:text-green-400 transition-colors duration-300 flex items-center cursor-pointer'>
-                    <span className='mr-2'>→</span>About
-                  </Link>
-                </li>
-                <li>
-                  <Link to='/contact' className='text-gray-400 hover:text-green-400 transition-colors duration-300 flex items-center cursor-pointer'>
-                    <span className='mr-2'>→</span>Contact
-                  </Link>
-                </li>
+              <h3 className='footer-column-heading'>Products</h3>
+              <ul className='footer-links-list'>
+                <li><Link to='/shop' className='footer-link'>Whole Spices</Link></li>
+                <li><Link to='/shop' className='footer-link'>Blended Spices</Link></li>
+                <li><Link to='/shop' className='footer-link'>Ground Spices</Link></li>
+                <li><Link to='/shop' className='footer-link'>Nutritious</Link></li>
+                <li><Link to='/shop' className='footer-link'>Sprinklers</Link></li>
+                <li><Link to='/shop' className='footer-link'>Saffron</Link></li>
+                <li><Link to='/shop' className='footer-link'>All Products</Link></li>
               </ul>
             </div>
 
-            {/* Support */}
+            {/* Column 3: About MoolTrue */}
             <div>
-              <h3 className='text-xl font-bold mb-6 flex items-center'>
-                <span className='w-1 h-6 bg-green-500 mr-3 rounded'></span>
-                Support
-              </h3>
-              <ul className='space-y-3'>
-                <li>
-                  <a href='#' className='text-gray-400 hover:text-green-400 transition-colors duration-300'>Recipes & Tips</a>
-                </li>
-                <li>
-                  <a href='#' className='text-gray-400 hover:text-green-400 transition-colors duration-300'>Organic Certification</a>
-                </li>
-                <li>
-                  <a href='#' className='text-gray-400 hover:text-green-400 transition-colors duration-300'>Delivery Info</a>
-                </li>
-                <li>
-                  <a href='#' className='text-gray-400 hover:text-green-400 transition-colors duration-300'>Returns & Refunds</a>
-                </li>
+              <h3 className='footer-column-heading'>About MoolTrue Foods</h3>
+              <ul className='footer-links-list'>
+                <li><Link to='/about' className='footer-link'>About Us</Link></li>
+                <li><Link to='/contact' className='footer-link'>Contact Us</Link></li>
+                <li><Link to='#' className='footer-link'>Return / Exchange</Link></li>
+                <li><Link to='#' className='footer-link'>CSR</Link></li>
               </ul>
             </div>
 
-            {/* Contact */}
+            {/* Column 4: Customer Services */}
             <div>
-              <h3 className='text-xl font-bold mb-6 flex items-center'>
-                <span className='w-1 h-6 bg-green-500 mr-3 rounded'></span>
-                Contact
-              </h3>
-              <div className='space-y-4'>
+              <h3 className='footer-column-heading'>Customer Services</h3>
+              <ul className='footer-links-list'>
+                <li><Link to='#' className='footer-link'>Terms & Conditions</Link></li>
+                <li><Link to='#' className='footer-link'>Privacy Policy</Link></li>
+                <li><Link to='#' className='footer-link'>Shipping Policy</Link></li>
+                <li><Link to='#' className='footer-link'>Return Policy</Link></li>
+              </ul>
+            </div>
+
+            {/* Column 5: Contact Us Details */}
+            <div>
+              <h3 className='footer-column-heading'>Contact Us</h3>
+              
+              <div className='footer-contact-details'>
                 <div>
-                  <p className='text-gray-400 text-sm mb-1'>Email</p>
-                  <a href='mailto:support@mooltrue.com' className='text-green-400 hover:text-green-300 transition-colors duration-300 font-semibold'>
-                    support@mooltrue.com
+                  <p className='footer-contact-title'>MoolTrue Foods Pvt. Ltd.</p>
+                </div>
+                
+                <div className="footer-contact-item">
+                  <FaMapMarkerAlt className="footer-contact-icon" size={12} />
+                  <div>
+                    <p className='footer-contact-text-label'>Head Office</p>
+                    <p className='footer-contact-text-val'>3rd Floor, B-63 Prashant Vihar<br />Road New Delhi 110085, India</p>
+                  </div>
+                </div>
+
+                <div className="footer-contact-item">
+                  <FaMapMarkerAlt className="footer-contact-icon" size={12} />
+                  <div>
+                    <p className='footer-contact-text-label'>Manufacturing Address</p>
+                    <p className='footer-contact-text-val'>Khasra No.9/6, Village Joshi Jat<br />Tehsil Rai, Bahalagarh sonipat<br />haryana, Haryana 131021</p>
+                    <p className='footer-contact-text-val-fssai'>FSSAI License No -<br />10016064000917</p>
+                  </div>
+                </div>
+
+                <div className="footer-contact-item">
+                  <FaEnvelope className="footer-contact-icon" size={12} />
+                  <a href='mailto:info@mooltrue.com' className='footer-contact-link'>
+                    info@mooltrue.com
                   </a>
                 </div>
-                <div>
-                  <p className='text-gray-400 text-sm mb-1'>Phone</p>
-                  <a href='tel:+919876543210' className='text-green-400 hover:text-green-300 transition-colors duration-300 font-semibold'>
-                    +91 9876543210
+
+                <div className="footer-contact-item">
+                  <FaPhone className="footer-contact-icon" size={12} />
+                  <a href='tel:01146370000' className='footer-contact-link'>
+                    011-4637-0000, 9090900040
                   </a>
                 </div>
-                <div>
-                  <p className='text-gray-400 text-sm mb-1'>Hours</p>
-                  <p className='text-gray-300'>Mon-Sun 8AM-10PM</p>
+                
+                <div className="footer-cin-container">
+                   <p className='footer-cin-label'>CIN Number -</p>
+                   <p className='footer-cin-val'>U15137DL2006PTC151221</p>
                 </div>
               </div>
             </div>
+            
           </div>
 
-          {/* Divider */}
-          <div className='border-t border-slate-700 pt-8'>
-            <div className='flex flex-col sm:flex-row justify-between items-center gap-4'>
-              <p className='text-gray-400 text-sm'>© 2026 MoolTrue Foods. All rights reserved. Certified Organic.</p>
-              <div className='flex gap-6'>
-                <a href='#' className='text-gray-400 hover:text-green-400 text-sm transition-colors duration-300'>Privacy Policy</a>
-                <a href='#' className='text-gray-400 hover:text-green-400 text-sm transition-colors duration-300'>Terms of Service</a>
-                <a href='#' className='text-gray-400 hover:text-green-400 text-sm transition-colors duration-300'>Quality Promise</a>
+          {/* Bottom Bar Divider */}
+          <div className='footer-bottom'>
+            <div className='footer-bottom-inner'>
+              
+              {/* Left: Button */}
+              <div>
+                <Link to="/contact" className="footer-partner-btn">
+                  Become Trade Partner
+                </Link>
               </div>
+
+              {/* Center: Copyright */}
+              <div>
+                <p className='footer-copyright'>
+                  © 2026 <span className="footer-copyright-orange">MoolTrueFoods.com.</span> All Rights Reserved.
+                </p>
+              </div>
+
+              {/* Right: Payment Methods & Secure text */}
+              <div className="footer-security-container">
+                <p className="footer-security-text">All Transactions are 100% Secure.</p>
+                <div className='footer-payment-icons'>
+                   <span>RuPay</span>
+                   <span className="text-blue-600 italic">VISA</span>
+                   <span className="text-red-500">mastercard</span>
+                   <span className="text-blue-400">Paytm</span>
+                   <span className="text-green-600">BHIM UPI</span>
+                   <span>NETBANKING</span>
+                </div>
+              </div>
+
             </div>
           </div>
+          
         </div>
       </div>
     </footer>

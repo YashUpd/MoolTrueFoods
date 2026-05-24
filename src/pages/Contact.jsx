@@ -1,309 +1,224 @@
-import { useState } from "react";
-import { motion } from "framer-motion";
-import { FaPhone, FaEnvelope, FaMapMarkerAlt, FaClock } from "react-icons/fa";
+import { useState, useEffect } from "react";
+import { FaHandshake, FaIdBadge, FaComments, FaQuestionCircle, FaMapMarkerAlt, FaEnvelope, FaPhone, FaTimes } from "react-icons/fa";
+import "./Contact.css";
 
 function Contact() {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    message: "",
-  });
-  const [submitted, setSubmitted] = useState(false);
+  const [activeModal, setActiveModal] = useState(null);
 
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
+  // Close modal on escape key
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === "Escape") setActiveModal(null);
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, []);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setSubmitted(true);
-    setTimeout(() => setSubmitted(false), 3000);
-  };
-
-  const contactInfo = [
+  const inquiryCards = [
     {
-      icon: <FaPhone size={24} />,
-      title: "Customer Care",
-      info: "+91 1800-XXX-XXXX",
-      subtext: "Mon-Sat 9AM-6PM",
+      title: "Business Enquiries",
+      icon: <FaHandshake size={42} className="text-[#194b82]" />,
+      details: [
+        { type: "Email", info: "b2b@mooltrue.com" },
+        { type: "Phone", info: "+91 9876543210" }
+      ]
     },
     {
-      icon: <FaEnvelope size={24} />,
-      title: "Bulk / B2B Orders",
-      info: "b2b@mooltrue.com",
-      subtext: "For distributors & restaurants",
+      title: "Career Enquiries",
+      icon: <FaIdBadge size={42} className="text-[#194b82]" />,
+      details: [
+        { type: "Email", info: "hr@mooltrue.com" },
+        { type: "Email", info: "careers@mooltrue.com" }
+      ]
     },
     {
-      icon: <FaMapMarkerAlt size={24} />,
-      title: "Corporate Office",
-      info: "New Delhi, India",
-      subtext: "Global Headquarters",
+      title: "Suggestions & Complaints",
+      icon: <FaComments size={42} className="text-[#194b82]" />,
+      details: [
+        { type: "Email", info: "support@mooltrue.com" }
+      ]
     },
     {
-      icon: <FaMapMarkerAlt size={24} />,
-      title: "Manufacturing Unit",
-      info: "Haryana, India",
-      subtext: "FSSAI Certified Facility",
-    },
+      title: "Product Query",
+      icon: <FaQuestionCircle size={42} className="text-[#194b82]" />,
+      details: [
+        { type: "Email", info: "info@mooltrue.com" },
+        { type: "Phone", info: "1800-123-4567" }
+      ]
+    }
   ];
 
   return (
-    <div className="bg-gradient-to-b from-white to-green-50">
-      {/* Hero Section */}
-      <section className="relative py-16 sm:py-20 md:py-32 bg-gradient-to-br from-slate-900 via-green-900 to-slate-900 text-white overflow-hidden">
-        <div className="absolute inset-0 opacity-20">
-          <div className="absolute -top-40 -right-40 w-80 h-80 bg-green-400 rounded-full blur-3xl"></div>
-          <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-green-500 rounded-full blur-3xl"></div>
+    <div className="contact-page">
+      
+      {/* Main Container */}
+      <div className="contact-container">
+        
+        {/* Header */}
+        <div className="contact-header">
+          <h1 className="contact-title">
+            Contact Us
+          </h1>
         </div>
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="relative z-10 max-w-4xl mx-auto text-center"
-          >
-            <h1 className="text-5xl md:text-7xl font-black mb-6">
-              Get in{" "}
-              <span className="bg-gradient-to-r from-green-300 to-green-500 bg-clip-text text-transparent">
-                Touch
-              </span>
-            </h1>
-            <p className="text-xl md:text-2xl text-green-100 leading-relaxed max-w-2xl mx-auto">
-              We'd love to hear from you. Send us a message and we'll respond as
-              soon as possible.
-            </p>
-          </motion.div>
+        {/* Inquiry Cards Grid */}
+        <div className="contact-cards-grid">
+          {inquiryCards.map((card, index) => (
+            <button
+              key={index}
+              onClick={() => setActiveModal(card)}
+              className={`contact-card ${
+                activeModal?.title === card.title ? 'active' : 'inactive'
+              }`}
+            >
+              <div className="contact-card-icon-wrap">
+                {/* Simulated Orange Accent */}
+                <div className="contact-card-accent-dot"></div>
+                {card.icon}
+              </div>
+              <h3 className="contact-card-title">
+                {card.title}
+              </h3>
+            </button>
+          ))}
         </div>
-      </section>
 
-      {/* Contact Info Cards */}
-      <section className="py-12 sm:py-16 md:py-24">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
-            {contactInfo.map((item, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: index * 0.1 }}
-                className="group bg-white rounded-2xl p-6 shadow-md hover:shadow-xl hover:-translate-y-2 transition-all duration-500 border border-green-100"
+        {/* Visit Us Section */}
+        <div>
+          <h2 className="contact-visit-title">Visit Us</h2>
+          
+          <div className="contact-visit-grid">
+            
+            {/* Left Column: Contact Details */}
+            <div className="contact-details-col">
+              
+              <div className="contact-detail-item">
+                <div className="contact-detail-icon-circle blue">
+                  <FaMapMarkerAlt size={18} />
+                </div>
+                <div className="contact-detail-content">
+                  <h4 className="contact-detail-heading">Head Office</h4>
+                  <p className="contact-detail-text">
+                    3rd Floor, B-63 Prashant Vihar Road New Delhi<br />
+                    110085, India
+                  </p>
+                </div>
+              </div>
+
+              <div className="contact-detail-item">
+                <div className="contact-detail-icon-circle blue">
+                  <FaMapMarkerAlt size={18} />
+                </div>
+                <div className="contact-detail-content">
+                  <h4 className="contact-detail-heading">Manufacturing Address</h4>
+                  <p className="contact-detail-text">
+                    Khasra No.9/6, Village Joshi Jat Tehsil Rai,<br />
+                    Bahalagarh sonipat haryana, Haryana 131021
+                  </p>
+                </div>
+              </div>
+
+              <div className="contact-detail-item">
+                <div className="contact-detail-icon-circle yellow">
+                  <FaEnvelope size={18} />
+                </div>
+                <div className="contact-detail-content">
+                  <h4 className="contact-detail-heading">Email Us</h4>
+                  <a href="mailto:info@mooltrue.com" className="contact-detail-link">
+                    info@mooltrue.com
+                  </a>
+                </div>
+              </div>
+
+              <div className="contact-detail-item">
+                <div className="contact-detail-icon-circle orange">
+                  <FaPhone size={18} />
+                </div>
+                <div className="contact-detail-content">
+                  <h4 className="contact-detail-heading">Call Us</h4>
+                  <a href="tel:01146370000" className="contact-detail-link">
+                    011-4637-0000
+                  </a>
+                </div>
+              </div>
+
+              <div className="contact-fssai-padding">
+                <div>
+                  <h4 className="contact-detail-heading">FSSAI License No</h4>
+                  <p className="contact-detail-text">
+                    10016064000917
+                  </p>
+                </div>
+              </div>
+
+            </div>
+
+            {/* Right Column: Google Map */}
+            <div className="contact-map-col">
+              <div className="contact-map-container">
+                <iframe 
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d13997.433890250668!2d77.126588!3d28.718047!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390d017a41981b95%3A0xc3c5095d33f114c0!2sPrashant%20Vihar%2C%20Sector%2014%2C%20Rohini%2C%20Delhi%2C%20110085!5e0!3m2!1sen!2sin!4v1716541577789!5m2!1sen!2sin" 
+                  width="100%" 
+                  height="100%" 
+                  style={{ border: 0 }} 
+                  allowFullScreen="" 
+                  loading="lazy" 
+                  referrerPolicy="no-referrer-when-downgrade"
+                  title="Office Location Map"
+                ></iframe>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      {/* Modal Overlay */}
+      {activeModal && (
+        <div className="contact-modal-overlay">
+          <div 
+            className="contact-modal-backdrop"
+            onClick={() => setActiveModal(null)}
+          ></div>
+          
+          <div className="contact-modal-content">
+            {/* Modal Header */}
+            <div className="contact-modal-header">
+              <h3 className="contact-modal-title">
+                {activeModal.title}
+              </h3>
+              <button 
+                onClick={() => setActiveModal(null)}
+                className="contact-modal-close"
               >
-                <div className="text-green-600 mb-4 group-hover:scale-110 group-hover:text-green-500 transition-all duration-300">
-                  {item.icon}
-                </div>
-                <h3 className="text-lg font-bold text-gray-900 mb-2">
-                  {item.title}
-                </h3>
-                <p className="text-green-600 font-semibold mb-1">{item.info}</p>
-                <p className="text-sm text-gray-600">{item.subtext}</p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Main Contact Section */}
-      <section className="py-12 sm:py-16 md:py-24">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
-            {/* Contact Form */}
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8 }}
-              className="bg-white rounded-3xl shadow-lg p-8 md:p-10 border border-green-100"
-            >
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-8">
-                Send us a Message
-              </h2>
-
-              <form onSubmit={handleSubmit} className="space-y-6">
-                {/* Name Field */}
-                <div>
-                  <label className="block text-xs font-bold text-gray-800 uppercase tracking-wider mb-2">
-                    Full Name
-                  </label>
-                  <input
-                    type="text"
-                    name="name"
-                    value={formData.name}
-                    onChange={handleChange}
-                    placeholder="Enter your full name"
-                    className="w-full bg-gray-50 border-2 border-gray-100 focus:border-green-500 focus:bg-white rounded-xl py-3 px-4 text-sm font-medium transition-all duration-300 outline-none text-gray-900 placeholder-gray-400"
-                    required
-                  />
-                </div>
-
-                {/* Email Field */}
-                <div>
-                  <label className="block text-xs font-bold text-gray-800 uppercase tracking-wider mb-2">
-                    Email Address
-                  </label>
-                  <input
-                    type="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    placeholder="Enter your email"
-                    className="w-full bg-gray-50 border-2 border-gray-100 focus:border-green-500 focus:bg-white rounded-xl py-3 px-4 text-sm font-medium transition-all duration-300 outline-none text-gray-900 placeholder-gray-400"
-                    required
-                  />
-                </div>
-
-                {/* Message Field */}
-                <div>
-                  <label className="block text-xs font-bold text-gray-800 uppercase tracking-wider mb-2">
-                    Message
-                  </label>
-                  <textarea
-                    name="message"
-                    value={formData.message}
-                    onChange={handleChange}
-                    rows="5"
-                    placeholder="Tell us how we can help..."
-                    className="w-full bg-gray-50 border-2 border-gray-100 focus:border-green-500 focus:bg-white rounded-xl py-3 px-4 text-sm font-medium transition-all duration-300 outline-none text-gray-900 placeholder-gray-400 resize-none"
-                    required
-                  ></textarea>
-                </div>
-
-                {/* Submit Button */}
-                <button
-                  type="submit"
-                  className="w-full bg-gradient-to-r from-green-500 to-green-600 text-white px-8 py-4 rounded-xl font-bold text-lg hover:shadow-lg hover:shadow-green-500/50 transform hover:scale-105 transition-all duration-300 mt-8"
-                >
-                  Send Message
-                </button>
-
-                {/* Success Message */}
-                {submitted && (
-                  <motion.div
-                    initial={{ opacity: 0, y: -10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0 }}
-                    className="bg-green-50 border-2 border-green-400 text-green-700 px-6 py-4 rounded-xl font-semibold text-center"
-                  >
-                    ✓ Message sent successfully! We'll be in touch soon.
-                  </motion.div>
-                )}
-              </form>
-            </motion.div>
-
-            {/* Info Section */}
-            <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8 }}
-              className="space-y-8"
-            >
-              <div>
-                <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
-                  Partner With Us
-                </h2>
-                <p className="text-lg text-gray-700 leading-relaxed mb-6">
-                  Whether you are a retailer, distributor, or a restaurant owner looking for premium sterilized spices in bulk, we have dedicated programs for you. Reach out to our B2B team for special pricing and sample requests.
-                </p>
-              </div>
-
-              {/* FAQ Section */}
-              <div className="bg-gradient-to-br from-green-50 to-white rounded-2xl p-8 border border-green-200">
-                <h3 className="text-2xl font-bold text-gray-900 mb-6">
-                  Inquiry Types
-                </h3>
-                <div className="space-y-4">
-                  <div>
-                    <h4 className="font-bold text-gray-900 mb-2">
-                      🤝 Distributorship
-                    </h4>
-                    <p className="text-gray-600">
-                      Join our pan-India network of authorized spice distributors.
-                    </p>
+                <FaTimes size={20} />
+              </button>
+            </div>
+            
+            {/* Modal Body */}
+            <div className="contact-modal-body">
+              {activeModal.details.map((detail, idx) => (
+                <div key={idx} className="contact-detail-item">
+                  <div className={`contact-detail-icon-circle ${detail.type === 'Phone' ? 'orange' : 'yellow'}`}>
+                    {detail.type === 'Phone' ? <FaPhone size={20} /> : <FaEnvelope size={20} />}
                   </div>
-                  <div>
-                    <h4 className="font-bold text-gray-900 mb-2">
-                      🏭 HoReCa & Bulk
-                    </h4>
-                    <p className="text-gray-600">
-                      Special wholesale packaging and pricing for Hotels, Restaurants, and Cafes.
-                    </p>
-                  </div>
-                  <div>
-                    <h4 className="font-bold text-gray-900 mb-2">
-                      🌍 Export Inquiries
-                    </h4>
-                    <p className="text-gray-600">
-                      We export our ISO-certified spices globally. Contact our export division.
-                    </p>
-                  </div>
-                  <div>
-                    <h4 className="font-bold text-gray-900 mb-2">
-                      🛒 Retail Customers
-                    </h4>
-                    <p className="text-gray-600">
-                      For issues with your online retail order, please provide your Order ID in the message.
-                    </p>
+                  <div className="contact-detail-content">
+                    <h4 className="contact-detail-heading">{detail.type}</h4>
+                    <a 
+                      href={detail.type === 'Phone' ? `tel:${detail.info.replace(/[^0-9+]/g, '')}` : `mailto:${detail.info}`}
+                      className="contact-detail-link"
+                      style={{ marginTop: 0 }}
+                    >
+                      {detail.info}
+                    </a>
                   </div>
                 </div>
-              </div>
-
-              {/* Response Time */}
-              <div className="bg-gradient-to-br from-green-50 to-white rounded-2xl p-8 border border-green-100">
-                <h3 className="text-xl font-bold text-gray-900 mb-4">
-                  ⏱️ Response Time
-                </h3>
-                <p className="text-gray-700 mb-4">
-                  We aim to respond to all inquiries within:
-                </p>
-                <ul className="space-y-2 text-gray-700">
-                  <li className="flex items-center">
-                    <span className="text-green-600 font-bold mr-3">✓</span>{" "}
-                    Emails: 24 hours
-                  </li>
-                  <li className="flex items-center">
-                    <span className="text-green-600 font-bold mr-3">✓</span>{" "}
-                    Phone: Immediate
-                  </li>
-                  <li className="flex items-center">
-                    <span className="text-green-600 font-bold mr-3">✓</span>{" "}
-                    Chat: Within 2 hours
-                  </li>
-                </ul>
-              </div>
-            </motion.div>
-          </div>
-        </div>
-      </section>
-
-      {/* Map Section */}
-      <section className="py-12 sm:py-16 md:py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="text-center mb-12"
-          >
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">Our Presence</h2>
-            <p className="text-xl text-gray-600">
-              Headquartered in New Delhi, manufacturing in Haryana, delivering globally.
-            </p>
-          </motion.div>
-
-          <div className="bg-gradient-to-br from-gray-100 to-gray-200 rounded-3xl overflow-hidden shadow-lg h-96">
-            <div className="w-full h-full bg-gradient-to-br from-green-100 to-green-50 flex items-center justify-center">
-              <div className="text-center">
-                <div className="text-6xl mb-4">🇮🇳</div>
-                <h3 className="text-2xl font-bold text-gray-800">
-                  Pan-India Delivery
-                </h3>
-                <p className="text-gray-600 mt-2">
-                  Fresh products delivered to your doorstep anywhere in India
-                </p>
-              </div>
+              ))}
             </div>
           </div>
         </div>
-      </section>
+      )}
+
     </div>
   );
 }
