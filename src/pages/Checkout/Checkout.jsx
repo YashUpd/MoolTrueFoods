@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { FaLock, FaShoppingBasket, FaCheckCircle, FaLeaf, FaCreditCard, FaMoneyBillWave, FaMobileAlt } from 'react-icons/fa'
 import { useCart } from '../../context/CartContext'
 import { useAuth } from '../../context/AuthContext'
+import { ordersAPI } from '../../api/client'
 import "./Checkout.css"
 
 function Checkout() {
@@ -79,21 +80,52 @@ function Checkout() {
   }
 
   // Form Submitting / Placing Order
-  const handlePlaceOrder = (e) => {
+  const handlePlaceOrder = async (e) => {
     e.preventDefault()
     
     // Set stage to processing
     setCheckoutStage('processing')
 
-    // Generate a random order number
-    const orderNo = `MTF-${Math.floor(100000 + Math.random() * 900000)}`
-    setGeneratedOrderNo(orderNo)
+    const orderData = {
+      customerName: formData.fullName,
+      customerEmail: formData.email,
+      customerPhone: formData.phone,
+      deliveryAddress: formData.address,
+      city: formData.city,
+      pincode: formData.pincode,
+      state: formData.state,
+      totalAmount: cartTotal,
+      discountAmount: discountAmount,
+      deliveryFee: deliveryFee,
+      gstAmount: gstTax,
+      grandTotal: grandTotal,
+      paymentMethod: formData.paymentMethod,
+      items: cartItems.map(item => ({
+        productId: item.id,
+        quantity: item.quantity,
+        price: item.price
+      }))
+    }
 
-    // Simulate 2.5 second network delay
-    setTimeout(() => {
-      setCheckoutStage('success')
-      clearCart() // Empty cart upon successful placement
-    }, 2500)
+    try {
+      const res = await ordersAPI.create(orderData)
+      
+      if (res.data && res.data.orderNumber) {
+        setGeneratedOrderNo(res.data.orderNumber)
+      } else {
+        setGeneratedOrderNo(`MTF-${Math.floor(100000 + Math.random() * 900000)}`)
+      }
+
+      // Small delay to let the processing animation finish smoothly
+      setTimeout(() => {
+        setCheckoutStage('success')
+        clearCart()
+      }, 1000)
+    } catch (error) {
+      console.error("Order placement failed:", error)
+      alert("Failed to place order. Please check your connection and try again.")
+      setCheckoutStage('idle')
+    }
   }
 
   // Derived Pricing Math

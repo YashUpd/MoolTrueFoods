@@ -2,12 +2,15 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FaStar, FaHeart, FaRegHeart } from "react-icons/fa";
 import { useWishlist } from "../../context/WishlistContext";
+import { useCart } from "../../context/CartContext";
 import "./ProductCard.css";
 
 function ProductCard({ product }) {
   const { isWishlisted, toggleWishlist } = useWishlist();
+  const { cartItems, addToCart, updateQuantity } = useCart();
   const [isAnimating, setIsAnimating] = useState(false);
   const wishlisted = isWishlisted(product.id);
+  const cartItem = cartItems.find(item => item.id === product.id);
   const navigate = useNavigate();
 
   const handleWishlistToggle = (e) => {
@@ -94,16 +97,42 @@ function ProductCard({ product }) {
             </span>
           </div>
 
-          <Link 
-            to={`/product/${product.id}`}
-            className="product-card-view-btn"
-            onClick={(e) => e.stopPropagation()}
-          >
-            View
-            <span className="product-card-view-btn-arrow">
-              →
-            </span>
-          </Link>
+          <div className="product-card-actions">
+            {!cartItem ? (
+              <button
+                className="product-card-add-btn"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  addToCart(product);
+                }}
+              >
+                Add To Cart
+              </button>
+            ) : (
+              <div className="product-card-qty-ctrl" onClick={(e) => e.stopPropagation()}>
+                <button
+                  className="product-card-qty-btn"
+                  onClick={() => updateQuantity(product.id, cartItem.quantity - 1)}
+                >
+                  -
+                </button>
+                <span className="product-card-qty-val">{cartItem.quantity}</span>
+                <button
+                  className="product-card-qty-btn"
+                  onClick={() => updateQuantity(product.id, cartItem.quantity + 1)}
+                >
+                  +
+                </button>
+              </div>
+            )}
+            <Link
+              to={`/product/${product.id}`}
+              className="product-card-view-btn"
+              onClick={(e) => e.stopPropagation()}
+            >
+              View
+            </Link>
+          </div>
         </div>
 
         {/* Additional Info */}
