@@ -1,7 +1,10 @@
 // Central API utility for all backend requests
 // Automatically uses Vite proxy in dev, or VITE_API_URL in production
 
-const BASE_URL = import.meta.env.VITE_API_URL || ''
+let BASE_URL = import.meta.env.VITE_API_URL || ''
+if (BASE_URL.endsWith('/')) {
+  BASE_URL = BASE_URL.slice(0, -1)
+}
 
 // Get JWT token from localStorage
 const getToken = () => localStorage.getItem('admin_token')
