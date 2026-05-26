@@ -103,9 +103,10 @@ function ProductDetails() {
             className="details-img-showcase"
           >
             <img
-              src={product.image}
+              src={product.image || 'https://images.unsplash.com/photo-1596040033229-a9821ebd058d?auto=format&fit=crop&q=80&w=800'}
               alt={product.name}
               className="details-showcase-img"
+              onError={(e) => { e.target.src = 'https://images.unsplash.com/photo-1596040033229-a9821ebd058d?auto=format&fit=crop&q=80&w=800' }}
             />
             {/* Badges */}
             <div className="details-badge-stack">

@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
+import { FaStar, FaQuoteLeft } from "react-icons/fa";
 import Hero from "../../components/Hero/Hero";
 import CategorySection from "../../components/CategorySection/CategorySection";
 import ProductCard from "../../components/ProductCard/ProductCard";
@@ -52,10 +53,50 @@ function Home() {
     },
   ];
 
+  const testimonials = [
+    {
+      name: "Anjali Mehta",
+      location: "Mumbai",
+      rating: 5,
+      text: "The A2 Ghee is absolutely divine! You can taste the purity. My family has switched to MoolTrue completely.",
+      avatar: "🧕"
+    },
+    {
+      name: "Rohit Verma",
+      location: "Delhi",
+      rating: 5,
+      text: "Best turmeric powder I've ever used. The color and aroma are unmatched. Lakadong turmeric is a game changer!",
+      avatar: "👨"
+    },
+    {
+      name: "Sneha Patel",
+      location: "Ahmedabad",
+      rating: 5,
+      text: "Fresh, organic, and delivered right to my doorstep. The Kashmiri almonds are absolutely premium quality.",
+      avatar: "👩"
+    },
+  ];
+
+  const marqueeItems = [
+    "🌿 100% Organic", "⭐ 10K+ Happy Customers", "🚚 Free Delivery ₹1000+",
+    "🏆 Award Winning Quality", "🧪 27 Quality Checks", "💚 Farm to Table Fresh",
+    "🌿 100% Organic", "⭐ 10K+ Happy Customers", "🚚 Free Delivery ₹1000+",
+    "🏆 Award Winning Quality", "🧪 27 Quality Checks", "💚 Farm to Table Fresh",
+  ];
+
   return (
     <div className="home-page">
       {/* Hero Section */}
       <Hero />
+
+      {/* Marquee Ticker */}
+      <div className="home-marquee-strip">
+        <div className="home-marquee-track animate-marquee">
+          {marqueeItems.map((item, i) => (
+            <span key={i} className="home-marquee-item">{item}</span>
+          ))}
+        </div>
+      </div>
 
       {/* Category Section (Our Product Range) */}
       <CategorySection />
@@ -75,15 +116,9 @@ function Home() {
           
           <div className="home-products-grid">
             {wholeSpices.map((product, index) => (
-              <motion.div
-                key={product.id}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                viewport={{ once: true }}
-              >
+              <div key={product.id}>
                 <ProductCard product={product} />
-              </motion.div>
+              </div>
             ))}
           </div>
           <div className="home-view-all-mobile-container">
@@ -94,12 +129,19 @@ function Home() {
         </div>
       </section>
 
+      {/* Decorative Divider */}
+      <div className="home-divider">
+        <div className="home-divider-line"></div>
+        <span className="home-divider-icon">🌿</span>
+        <div className="home-divider-line"></div>
+      </div>
+
       {/* Blended Spices Section */}
       <section className="home-section bg-gray border-bottom">
         <div className="home-container">
           <div className="home-section-header">
             <div>
-              <h2 className="home-section-title">Blended Spices</h2>
+              <h2 className="home-section-title">Ghee & Essential Oils</h2>
               <div className="home-section-underline"></div>
             </div>
             <Link to="/shop" className="home-view-all-desktop">
@@ -109,22 +151,49 @@ function Home() {
           
           <div className="home-products-grid">
             {blendedSpices.map((product, index) => (
-              <motion.div
-                key={product.id}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                viewport={{ once: true }}
-              >
+              <div key={product.id}>
                 <ProductCard product={product} />
-              </motion.div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Testimonials Section */}
+      <section className="home-section py-24 bg-white">
+        <div className="home-container">
+          <div className="home-center-header">
+            <h2 className="home-center-title">
+              What Our <span className="home-center-title-green">Customers</span> Say
+            </h2>
+            <div className="home-center-underline"></div>
+          </div>
+
+          <div className="home-testimonials-grid">
+            {testimonials.map((testimonial, index) => (
+              <div key={index} className="home-testimonial-card">
+                <FaQuoteLeft className="home-testimonial-quote" />
+                <p className="home-testimonial-text">{testimonial.text}</p>
+                <div className="home-testimonial-stars">
+                  {[...Array(testimonial.rating)].map((_, i) => (
+                    <FaStar key={i} size={14} />
+                  ))}
+                </div>
+                <div className="home-testimonial-author">
+                  <div className="home-testimonial-avatar">{testimonial.avatar}</div>
+                  <div>
+                    <p className="home-testimonial-name">{testimonial.name}</p>
+                    <p className="home-testimonial-location">{testimonial.location}</p>
+                  </div>
+                </div>
+              </div>
             ))}
           </div>
         </div>
       </section>
 
       {/* Why we are the Finest Spices Section */}
-      <section className="home-section py-24 bg-white">
+      <section className="home-section py-24 bg-gray">
         <div className="home-container">
           <div className="home-center-header">
             <h2 className="home-center-title">
@@ -135,14 +204,7 @@ function Home() {
 
           <div className="home-reasons-grid">
             {finestReasons.map((reason, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                viewport={{ once: true }}
-                className="home-reason-card"
-              >
+              <div key={index} className="home-reason-card">
                 <div className="home-reason-icon-wrap">
                   {reason.icon}
                 </div>
@@ -152,7 +214,7 @@ function Home() {
                 <p className="home-reason-desc">
                   {reason.desc}
                 </p>
-              </motion.div>
+              </div>
             ))}
           </div>
         </div>
@@ -165,18 +227,20 @@ function Home() {
         <div className="home-cta-decor-2"></div>
         
         <div className="home-cta-container">
-          <h2 className="home-cta-title">
-            Start Your Pure Spices Journey
-          </h2>
-          <p className="home-cta-desc">
-            Experience the difference of authentic, lab-tested Indian spices. Your first order comes with a special welcome discount.
-          </p>
-          <Link
-            to="/shop"
-            className="home-cta-btn"
-          >
-            Shop Now & Get 20% Off
-          </Link>
+          <div>
+            <h2 className="home-cta-title">
+              Start Your Pure Spices Journey
+            </h2>
+            <p className="home-cta-desc">
+              Experience the difference of authentic, lab-tested Indian spices. Your first order comes with a special welcome discount.
+            </p>
+            <Link
+              to="/shop"
+              className="home-cta-btn"
+            >
+              Shop Now & Get 20% Off
+            </Link>
+          </div>
         </div>
       </section>
     </div>

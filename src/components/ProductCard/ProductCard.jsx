@@ -1,16 +1,36 @@
-import { Link } from "react-router-dom";
-import { FaStar, FaHeart } from "react-icons/fa";
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { FaStar, FaHeart, FaRegHeart } from "react-icons/fa";
+import { useWishlist } from "../../context/WishlistContext";
 import "./ProductCard.css";
 
 function ProductCard({ product }) {
+  const { isWishlisted, toggleWishlist } = useWishlist();
+  const [isAnimating, setIsAnimating] = useState(false);
+  const wishlisted = isWishlisted(product.id);
+  const navigate = useNavigate();
+
+  const handleWishlistToggle = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsAnimating(true);
+    toggleWishlist(product.id);
+    setTimeout(() => setIsAnimating(false), 500);
+  };
+
+  const handleCardClick = () => {
+    navigate(`/product/${product.id}`);
+  };
+
   return (
-    <div className="product-card">
+    <div className="product-card" onClick={handleCardClick} style={{ cursor: 'pointer' }}>
       {/* Image Container */}
       <div className="product-card-img-wrap">
         <img
-          src={product.image}
+          src={product.image || 'https://images.unsplash.com/photo-1596040033229-a9821ebd058d?auto=format&fit=crop&q=80&w=800'}
           alt={product.name}
           className="product-card-img"
+          onError={(e) => { e.target.src = 'https://images.unsplash.com/photo-1596040033229-a9821ebd058d?auto=format&fit=crop&q=80&w=800' }}
         />
 
         {/* Overlay on hover */}
@@ -22,8 +42,12 @@ function ProductCard({ product }) {
         </div>
 
         {/* Wishlist Button */}
-        <button className="product-card-wishlist">
-          <FaHeart size={16} />
+        <button
+          className={`product-card-wishlist ${wishlisted ? 'wishlisted' : ''} ${isAnimating ? 'animate-heart-pulse' : ''}`}
+          onClick={handleWishlistToggle}
+          aria-label={wishlisted ? 'Remove from wishlist' : 'Add to wishlist'}
+        >
+          {wishlisted ? <FaHeart size={16} /> : <FaRegHeart size={16} />}
         </button>
 
         {/* Stock Status */}
@@ -46,7 +70,7 @@ function ProductCard({ product }) {
               ))}
             </div>
             <span className="product-card-rating-val">
-              (4.8)
+              ({product.rating || 4.8})
             </span>
           </div>
         </div>
@@ -58,7 +82,7 @@ function ProductCard({ product }) {
 
         {/* Description */}
         <p className="product-card-desc">
-          Farm fresh & pesticide-free
+          {product.weight ? `${product.weight} • ` : ''}Farm fresh & pesticide-free
         </p>
 
         {/* Price & Button Row */}
@@ -73,6 +97,7 @@ function ProductCard({ product }) {
           <Link 
             to={`/product/${product.id}`}
             className="product-card-view-btn"
+            onClick={(e) => e.stopPropagation()}
           >
             View
             <span className="product-card-view-btn-arrow">
@@ -84,7 +109,7 @@ function ProductCard({ product }) {
         {/* Additional Info */}
         <div className="product-card-sold-info">
           <p className="product-card-sold-text">
-            <span className="product-card-sold-text-green">100+ sold</span> this month
+            <span className="product-card-sold-text-green">{product.reviewsCount || 100}+ sold</span> this month
           </p>
         </div>
       </div>

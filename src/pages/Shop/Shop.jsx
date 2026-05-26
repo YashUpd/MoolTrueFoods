@@ -1,5 +1,6 @@
 import { useState, useMemo, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import { useSearchParams } from 'react-router-dom'
 import { FaSearch, FaSlidersH, FaTimes, FaUndo } from 'react-icons/fa'
 import ProductCard from '../../components/ProductCard/ProductCard'
 import { productsAPI } from '../../api/client'
@@ -7,6 +8,7 @@ import products from '../../data/products'
 import "./Shop.css"
 
 function Shop() {
+  const [searchParams] = useSearchParams()
   const [productsList, setProductsList] = useState(products)
   const [loadingProducts, setLoadingProducts] = useState(true)
 
@@ -26,11 +28,21 @@ function Shop() {
     fetchProducts()
   }, [])
 
-  const [searchQuery, setSearchQuery] = useState('')
+  // Read search param from URL (set by Home search bar or Navbar)
+  const urlSearch = searchParams.get('search') || ''
+  const [searchQuery, setSearchQuery] = useState(urlSearch)
   const [selectedCategory, setSelectedCategory] = useState('All')
   const [maxPrice, setMaxPrice] = useState(1600)
   const [sortBy, setSortBy] = useState('popular')
   const [isMobileFiltersOpen, setIsMobileFiltersOpen] = useState(false)
+
+  // Sync searchQuery when URL param changes (e.g. new navigation from Home)
+  useEffect(() => {
+    const newSearch = searchParams.get('search') || ''
+    if (newSearch) {
+      setSearchQuery(newSearch)
+    }
+  }, [searchParams])
 
   const categories = ['All', 'Ghee & Oils', 'Honey & Sweeteners', 'Grains & Staples', 'Nuts & Seeds', 'Spices & Herbs']
 
@@ -42,12 +54,14 @@ function Shop() {
   // Filtered and Sorted Products
   const filteredProducts = useMemo(() => {
     let result = [...productsList]
+    const query = searchQuery.toLowerCase().trim()
 
     // Search query filter
-    if (searchQuery.trim() !== '') {
-      const query = searchQuery.toLowerCase().trim()
+    if (query !== '') {
       result = result.filter(
-        p => p.name.toLowerCase().includes(query) || p.description.toLowerCase().includes(query)
+        p => p.name.toLowerCase().includes(query) || 
+             (p.description && p.description.toLowerCase().includes(query)) ||
+             (p.category && p.category.toLowerCase().includes(query))
       )
     }
 
@@ -60,16 +74,40 @@ function Shop() {
     result = result.filter(p => p.price <= maxPrice)
 
     // Sorting
-    if (sortBy === 'price-low') {
-      result.sort((a, b) => a.price - b.price)
-    } else if (sortBy === 'price-high') {
-      result.sort((a, b) => b.price - a.price)
-    } else if (sortBy === 'rating') {
-      result.sort((a, b) => b.rating - a.rating)
-    } else {
-      // 'popular' sorting by reviewsCount
-      result.sort((a, b) => b.reviewsCount - a.reviewsCount)
-    }
+    result.sort((a, b) => {
+      // 1. If searching, prioritize exact matches first
+      if (query !== '') {
+        const aName = a.name.toLowerCase()
+        const bName = b.name.toLowerCase()
+        
+        // Exact match gets highest priority
+        const aExact = aName === query ? 1 : 0
+        const bExact = bName === query ? 1 : 0
+        if (aExact !== bExact) return bExact - aExact
+        
+        // Starts with gets second priority
+        const aStartsWith = aName.startsWith(query) ? 1 : 0
+        const bStartsWith = bName.startsWith(query) ? 1 : 0
+        if (aStartsWith !== bStartsWith) return bStartsWith - aStartsWith
+        
+        // Includes in name gets third priority
+        const aNameMatch = aName.includes(query) ? 1 : 0
+        const bNameMatch = bName.includes(query) ? 1 : 0
+        if (aNameMatch !== bNameMatch) return bNameMatch - aNameMatch
+      }
+      
+      // 2. Normal sorting
+      if (sortBy === 'price-low') {
+        return a.price - b.price
+      } else if (sortBy === 'price-high') {
+        return b.price - a.price
+      } else if (sortBy === 'rating') {
+        return (b.rating || 0) - (a.rating || 0)
+      } else {
+        // 'popular' sorting by reviewsCount
+        return (b.reviewsCount || 0) - (a.reviewsCount || 0)
+      }
+    })
 
     return result
   }, [productsList, searchQuery, selectedCategory, maxPrice, sortBy])

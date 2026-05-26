@@ -1,32 +1,24 @@
+import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import "./CategorySection.css";
 
 function CategorySection() {
   const categories = [
     {
-      name: "Whole Spices",
-      icon: "🌶️",
-      count: "40+ Items",
-      description: "Authentic whole spices for rich flavor bases"
+      name: "Premium Spices",
+      image: "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?auto=format&fit=crop&w=800&q=80",
+      link: "/shop?category=spices"
     },
     {
-      name: "Blended Spices",
-      icon: "🍛",
-      count: "25+ Items",
-      description: "Perfectly balanced ready-to-cook masalas"
+      name: "Pure Golden Ghee",
+      image: "https://images.unsplash.com/photo-1589154737229-b68e59275b1c?auto=format&fit=crop&w=800&q=80",
+      link: "/shop?category=ghee"
     },
     {
-      name: "Ground Spices",
-      icon: "🧂",
-      count: "30+ Items",
-      description: "Finely ground pure spices for everyday cooking"
-    },
-    {
-      name: "Premium Saffron",
-      icon: "🌸",
-      count: "15+ Items",
-      description: "Pure, high-grade saffron for royal dishes"
-    },
+      name: "Organic Raw Honey",
+      image: "https://images.unsplash.com/photo-1587049352847-4d4b126a41f8?auto=format&fit=crop&w=800&q=80",
+      link: "/shop?category=honey"
+    }
   ];
 
   return (
@@ -34,45 +26,21 @@ function CategorySection() {
       <div className="categories-container">
         {/* Section Header */}
         <div className="categories-header">
-          <h2 className="categories-title">
-            Our Product Range
-          </h2>
+          <h2 className="categories-title">Shop by Category</h2>
           <div className="categories-underline"></div>
-          <p className="categories-subtitle">
-            Discover the finest selection of authentic Indian spices, rigorously tested and packaged for purity.
-          </p>
         </div>
 
         {/* Categories Grid */}
         <div className="categories-grid">
           {categories.map((category, index) => (
-            <Link
-              to="/shop"
-              key={index}
-              className="category-card"
-            >
-              {/* Icon Container */}
-              <div className="category-icon-wrap">
-                <span className="category-icon">
-                  {category.icon}
-                </span>
-              </div>
-
-              {/* Title */}
-              <h3 className="category-card-title">
-                {category.name}
-              </h3>
-
-              {/* Description */}
-              <p className="category-card-desc">
-                {category.description}
-              </p>
-
-              {/* Explore Link */}
-              <span className="category-card-explore">
-                Explore <span className="category-card-explore-arrow">→</span>
-              </span>
-            </Link>
+            <div key={index}>
+              <Link to={category.link} className="category-card">
+                <div className="category-image-wrapper glass-panel">
+                  <img src={category.image} alt={category.name} className="category-image" />
+                </div>
+                <h3 className="category-name">{category.name}</h3>
+              </Link>
+            </div>
           ))}
         </div>
       </div>
