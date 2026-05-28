@@ -92,3 +92,29 @@ model OrderItem {
 
   @@map("order_items")
 }
+
+// ─── Live Chat Support (Persisted Threads) ─────────────────────────────────────
+model ChatSession {
+  id            Int           @id @default(autoincrement())
+  sessionToken  String        @unique // Track persistent user session
+  customerName  String?
+  customerEmail String?
+  status        String        @default("bot") // "bot" | "human" | "closed"
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+  messages      ChatMessage[]
+
+  @@map("chat_sessions")
+}
+
+model ChatMessage {
+  id        Int         @id @default(autoincrement())
+  sender    String      // "bot" | "customer" | "admin"
+  text      String      @db.Text
+  createdAt DateTime    @default(now())
+  
+  sessionId Int
+  session   ChatSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+
+  @@map("chat_messages")
+}

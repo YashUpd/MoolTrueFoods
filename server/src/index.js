@@ -1,7 +1,9 @@
 import 'dotenv/config'
+import { createServer } from 'http'
 import express from 'express'
 import cors from 'cors'
 
+import { setupSockets } from './socket.js'
 import authRoutes from './routes/authRoutes.js'
 import productRoutes from './routes/productRoutes.js'
 import orderRoutes from './routes/orderRoutes.js'
@@ -79,7 +81,10 @@ app.use((err, req, res, next) => {
 })
 
 // ─── Start Server ─────────────────────────────────────────────────────────────
-app.listen(PORT, () => {
+const server = createServer(app)
+setupSockets(server)
+
+server.listen(PORT, () => {
   console.log(`\n🚀 MoolTrue Foods API running on port ${PORT}`)
   console.log(`📍 Health check: http://localhost:${PORT}/health`)
   console.log(`🌿 Environment: ${process.env.NODE_ENV || 'development'}\n`)

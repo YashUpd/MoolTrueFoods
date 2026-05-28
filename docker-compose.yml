@@ -1,0 +1,85 @@
+
+services:
+  # ─── Local Database (Saves offline postgres state) ──────────────────────────
+  db:
+    image: postgres:15-alpine
+    container_name: mtf-postgres
+    restart: always
+    environment:
+      POSTGRES_USER: mtf_user
+      POSTGRES_PASSWORD: mtf_secure_password
+      POSTGRES_DB: mtf_local_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - mtf-network
+
+  # ─── Backend Service ────────────────────────────────────────────────────────
+  backend:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    container_name: mtf-backend
+    restart: always
+    ports:
+      - "5000:5000"
+    environment:
+      # Toggle: Replace this URL with your Neon connection string to use the cloud DB!
+      - DATABASE_URL=postgresql://mtf_user:mtf_secure_password@db:5432/mtf_local_db?sslmode=disable
+      - JWT_SECRET=b28177eaa77cb84d8eb5824b95d9cd368796b089f3c5d91a82176dd88f0c8fbdc1b8b7619e34dd9c24fbeeb5099d4a197fe0fa622feb8eed37faadd0af630f42
+      - JWT_EXPIRES_IN=7d
+      - GOOGLE_CLIENT_ID=199810125005-5t6tf19qbudbpijfeoo9nh11btv64c7s.apps.googleusercontent.com
+      - CLOUDINARY_CLOUD_NAME=doqxedpw2
+      - CLOUDINARY_API_KEY=229533295852153
+      - CLOUDINARY_API_SECRET=wRPpCGe1s1Brqe_fugAWHwHd1CE
+      - RAZORPAY_KEY_ID=rzp_test_StAxRSMpBzVpcU
+      - RAZORPAY_KEY_SECRET=oJjb2fWzEQ4aFa0CZku1B6gL
+      - ADMIN_EMAILS=yash20upd@gmail.com,arntiwari4@gmail.com
+    volumes:
+      - ./server:/app
+      - /app/node_modules # Prevents local node_modules from overwriting container's Alpine modules
+    entrypoint: >
+      sh -c "
+        echo '⏳ Waiting for postgres database to warm up...' &&
+        sleep 5 &&
+        echo '🔄 Running Prisma db push...' &&
+        npx prisma db push &&
+        echo '🌱 Seeding initial products...' &&
+        node src/seed.js &&
+        echo '🚀 Starting development server...' &&
+        npm run dev
+      "
+    depends_on:
+      - db
+    networks:
+      - mtf-network
+
+  # ─── Frontend Service ───────────────────────────────────────────────────────
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: mtf-frontend
+    restart: always
+    ports:
+      - "5173:5173"
+    environment:
+      - DOCKER=true # Tells Vite to proxy /api requests to http://backend:5000
+      - VITE_GOOGLE_CLIENT_ID=199810125005-5t6tf19qbudbpijfeoo9nh11btv64c7s.apps.googleusercontent.com
+      - VITE_RAZORPAY_KEY_ID=rzp_test_StAxRSMpBzVpcU
+    volumes:
+      - .:/app
+      - /app/node_modules # Prevents local node_modules from overwriting container modules
+    depends_on:
+      - backend
+    networks:
+      - mtf-network
+
+networks:
+  mtf-network:
+    driver: bridge
+
+volumes:
+  postgres_data:

@@ -20,6 +20,8 @@ import AdminLayout from './pages/Admin/AdminLayout'
 import AdminDashboard from './pages/Admin/AdminDashboard'
 import AdminProducts from './pages/Admin/AdminProducts'
 import AdminOrders from './pages/Admin/AdminOrders'
+import AdminSupport from './pages/Admin/AdminSupport'
+import ChatWidget from './components/ChatWidget/ChatWidget'
 import './App.css'
 
 // Protect admin routes — redirect to login if no JWT token
@@ -81,6 +83,7 @@ function AnimatedRoutes() {
       </div>
       <Footer />
       <CartDrawer />
+      <ChatWidget />
     </div>
   )
 }
@@ -111,6 +114,7 @@ function App() {
                   <Route index element={<AdminDashboard />} />
                   <Route path="products" element={<AdminProducts />} />
                   <Route path="orders" element={<AdminOrders />} />
+                  <Route path="support" element={<AdminSupport />} />
                 </Route>
               </Routes>
             </BrowserRouter>
