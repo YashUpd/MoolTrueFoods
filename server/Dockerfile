@@ -1,7 +1,7 @@
-FROM node:20-alpine
+FROM node:20-slim
 
-# Install OpenSSL and libc compatibility layers for Prisma Schema Engine
-RUN apk add --no-cache openssl libc6-compat
+# Install OpenSSL for Prisma Schema Engine (Debian requires apt-get)
+RUN apt-get update && apt-get install -y openssl && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
 

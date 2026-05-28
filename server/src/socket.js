@@ -1,6 +1,38 @@
 import { Server } from 'socket.io'
 import prisma from './db.js'
 import OpenAI from "openai";
+import { pipeline, env } from '@xenova/transformers';
+
+env.allowLocalModels = false;
+
+let extractor;
+let anchorEmbeddings = [];
+const ANCHORS = [
+  "I want to buy organic food, ghee, honey, or healthy cold pressed oils.",
+  "What is the price of this product?",
+  "When will my order be delivered and what are the shipping costs?",
+  "I want to track my order status.",
+  "I need customer support, please connect me to a human."
+];
+
+function cosineSimilarity(vecA, vecB) {
+  let dotProduct = 0;
+  for (let i = 0; i < vecA.length; i++) dotProduct += vecA[i] * vecB[i];
+  return dotProduct; // Vectors from all-MiniLM-L6-v2 with normalize: true are already L2 normalized
+}
+
+(async () => {
+  try {
+    extractor = await pipeline('feature-extraction', 'Xenova/all-MiniLM-L6-v2');
+    for (const text of ANCHORS) {
+      const output = await extractor(text, { pooling: 'mean', normalize: true });
+      anchorEmbeddings.push(Array.from(output.data));
+    }
+    console.log("✅ Semantic guardrails initialized!");
+  } catch (err) {
+    console.error("Failed to initialize semantic guardrails:", err);
+  }
+})();
 
 const groqClient = new OpenAI({
     apiKey: process.env.GROQ_API_KEY,
@@ -28,23 +60,8 @@ Do not invent policies or products that aren't listed above.
 GUARDRAILS (CRITICAL):
 You are strictly an organic food customer support agent. If the user asks you to write code (like C++, Python, etc.), solve math problems, write essays, or talk about topics completely unrelated to MoolTrue Foods, you MUST politely refuse and redirect them to asking about MoolTrue Foods products. Never write code for the user.`;
 
-// Local Heuristic Intent Router
-const calculateRelevanceScore = (text) => {
-  const foodTerms = ['ghee', 'honey', 'jaggery', 'oil', 'mustard', 'salt', 'pink', 'rice', 'basmati', 'almond', 'chia', 'seed', 'organic', 'natural', 'pure', 'food', 'mooltrue', 'eat', 'taste', 'nutrition', 'health', 'diet'];
-  const commerceTerms = ['buy', 'order', 'track', 'shipping', 'delivery', 'deliver', 'cost', 'price', 'rupees', 'cancel', 'return', 'refund', 'payment', 'pay'];
-  const techTerms = ['code', 'java', 'react', 'python', 'c++', 'cpp', 'html', 'css', 'javascript', 'js', 'app', 'software', 'programming', 'developer', 'script', 'function', 'variable', 'database', 'sql'];
-  const genericTerms = ['write', 'essay', 'poem', 'math', 'calculate', 'solve', 'translate', 'story', 'history'];
-
-  let score = 0;
-  
-  foodTerms.forEach(t => { if (text.includes(t)) score += 2 });
-  commerceTerms.forEach(t => { if (text.includes(t)) score += 1 });
-  
-  techTerms.forEach(t => { if (text.includes(t)) score -= 5 });
-  genericTerms.forEach(t => { if (text.includes(t)) score -= 5 });
-
-  return score;
-}
+// Semantic Intent Router
+// The actual semantic check is performed within processLocalNLP
 
 // Standalone local NLP processor (powered by Groq)
 const processLocalNLP = async (messageText, sessionId) => {
@@ -78,14 +95,26 @@ const processLocalNLP = async (messageText, sessionId) => {
     return 'handoff'
   }
 
-  // 2.5 Local Semantic Guardrails (Pre-LLM Filtering to save API cost)
+  // 2.5 True Semantic Guardrails (Pre-LLM Filtering to save API cost)
   const isConversational = ['hi', 'hello', 'hey', 'thanks', 'thank you', 'ok', 'okay', 'yes', 'no', 'hi there'].includes(text);
   
-  if (!isConversational) {
-    const score = calculateRelevanceScore(text);
-    // If strongly negative (tech/math words), or 0 and long (random unrelated chatter)
-    if (score < 0 || (score === 0 && text.length > 20)) {
-      return "🌿 I am a dedicated MoolTrue Foods assistant. I can only help you with questions about our organic products, orders, and delivery. How can I assist you with our store today?";
+  if (!isConversational && extractor && anchorEmbeddings.length > 0) {
+    try {
+      const output = await extractor(text, { pooling: 'mean', normalize: true });
+      const queryVec = Array.from(output.data);
+      
+      let maxSim = -1;
+      for (const anchorVec of anchorEmbeddings) {
+        const sim = cosineSimilarity(queryVec, anchorVec);
+        if (sim > maxSim) maxSim = sim;
+      }
+      
+      // If the query is semantically unrelated to our anchors (score < 0.25)
+      if (maxSim < 0.25) {
+        return "🌿 I am a dedicated MoolTrue Foods assistant. I can only help you with questions about our organic products, orders, and delivery. How can I assist you with our store today?";
+      }
+    } catch (e) {
+      console.error("Semantic extraction error", e);
     }
   }
 
@@ -98,22 +127,16 @@ const processLocalNLP = async (messageText, sessionId) => {
       take: 6 // Up to 6 messages to provide history
     })
 
-    const history = previousMessages.reverse().map(msg => ({
-      role: msg.sender === 'customer' ? 'user' : 'assistant',
-      content: msg.text
-    }))
+    const historyText = previousMessages.reverse().map(msg => `${msg.sender === 'customer' ? 'Customer' : 'Assistant'}: ${msg.text}`).join('\n')
 
-    const response = await groqClient.chat.completions.create({
-      model: "llama-3.1-8b-instant",
-      messages: [
-        { role: "system", content: SYSTEM_PROMPT },
-        ...history
-      ],
-      temperature: 0.3,
-      max_tokens: 300
+    const promptText = `${SYSTEM_PROMPT}\n\nChat History:\n${historyText}\n\nAssistant:`
+
+    const response = await groqClient.responses.create({
+      model: "openai/gpt-oss-20b",
+      input: promptText
     })
 
-    return response.choices[0].message.content
+    return response.output_text
   } catch (error) {
     console.error("Groq LLM Error:", error)
     return "🤔 I'm having a little trouble connecting to my brain right now. You can try again, or type **human** to speak to a real person!"
