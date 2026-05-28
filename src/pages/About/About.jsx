@@ -69,16 +69,19 @@ function About() {
           >
             <div className="about-order-mobile-2">
               <h2 className="about-section-title">
-                Our Journey
+                Taste the purity
               </h2>
               <p className="about-section-desc">
-                MoolTrue Foods was born from a simple belief: that Indian spices should reach the world in their purest, most authentic form. Founded in 1982, we started as a small local mill and have grown into a premier spice manufacturer.
+                Long before the world was as connected as it is today, humans’ insatiable appetite for flavour forged the very first international trade routes, driving commerce for many millenia. And at the heart of this trade was — and still is — India, the fabled land of spices.
               </p>
               <p className="about-section-desc">
-                Today, our spices are processed in state-of-the-art FSSAI & ISO certified facilities. We meticulously clean, grade, roast, and cold-grind our spices to ensure the natural essential oils are preserved, providing you with unmatched flavor and aroma.
+                But even though Indian spices continue to season food in kitchens around the world, Indians themselves often complain about the options available to them at home. A recent survey found that 72% of Indians are concerned about the quality of spices they consume.
               </p>
               <p className="about-section-desc">
-                Our commitment is unwavering: 100% pure, unadulterated, and sterilized spices that bring the rich culinary heritage of India straight to your kitchen.
+                At Mool, we hold a simple belief: in the spice capital of the world, you shouldn’t have to worry about what you’re putting in your plate of food. That is why we focus on the fundamentals.
+              </p>
+              <p className="about-section-desc">
+                Our range of premium whole spices are sourced from their true origins, selected for finest quality and taste, and cleaned and processed with the highest standards of hygiene. No additives, no artificial colours and flavours, no stress for you. Mool: Taste the purity.
               </p>
             </div>
             <div className="about-order-mobile-1">

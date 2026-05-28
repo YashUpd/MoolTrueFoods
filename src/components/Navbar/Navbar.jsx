@@ -76,9 +76,7 @@ function Navbar() {
       <div className="navbar-inner">
         {/* Logo */}
         <Link to="/" onClick={closeMenu} className="navbar-logo-link">
-          <h1 className="navbar-logo">
-            MoolTrue<span className="navbar-logo-orange">Foods</span>
-          </h1>
+          <img src="/logo.png" alt="MoolTrue Foods Logo" className="navbar-logo-img" />
         </Link>
 
         {/* Desktop Navigation & Search */}

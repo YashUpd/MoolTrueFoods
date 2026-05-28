@@ -38,12 +38,12 @@ function Hero() {
               🌿 Premium Quality Organic Foods
             </div>
             <h1 className="hero-title">
-              Modern Organic <br />
-              <span className="hero-title-green">Living</span>
+              Taste the <br />
+              <span className="hero-title-green">Purity</span>
               <span className="hero-title-dot">.</span>
             </h1>
             <p className="hero-desc">
-              Experience the purity of nature with our handpicked organic spices, ghee, honey, and superfoods — sourced directly from Indian farms.
+              Premium whole spices sourced from their true origins. No additives, no artificial colours and flavours, no stress for you.
             </p>
 
 
