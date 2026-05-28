@@ -28,6 +28,24 @@ Do not invent policies or products that aren't listed above.
 GUARDRAILS (CRITICAL):
 You are strictly an organic food customer support agent. If the user asks you to write code (like C++, Python, etc.), solve math problems, write essays, or talk about topics completely unrelated to MoolTrue Foods, you MUST politely refuse and redirect them to asking about MoolTrue Foods products. Never write code for the user.`;
 
+// Local Heuristic Intent Router
+const calculateRelevanceScore = (text) => {
+  const foodTerms = ['ghee', 'honey', 'jaggery', 'oil', 'mustard', 'salt', 'pink', 'rice', 'basmati', 'almond', 'chia', 'seed', 'organic', 'natural', 'pure', 'food', 'mooltrue', 'eat', 'taste', 'nutrition', 'health', 'diet'];
+  const commerceTerms = ['buy', 'order', 'track', 'shipping', 'delivery', 'deliver', 'cost', 'price', 'rupees', 'cancel', 'return', 'refund', 'payment', 'pay'];
+  const techTerms = ['code', 'java', 'react', 'python', 'c++', 'cpp', 'html', 'css', 'javascript', 'js', 'app', 'software', 'programming', 'developer', 'script', 'function', 'variable', 'database', 'sql'];
+  const genericTerms = ['write', 'essay', 'poem', 'math', 'calculate', 'solve', 'translate', 'story', 'history'];
+
+  let score = 0;
+  
+  foodTerms.forEach(t => { if (text.includes(t)) score += 2 });
+  commerceTerms.forEach(t => { if (text.includes(t)) score += 1 });
+  
+  techTerms.forEach(t => { if (text.includes(t)) score -= 5 });
+  genericTerms.forEach(t => { if (text.includes(t)) score -= 5 });
+
+  return score;
+}
+
 // Standalone local NLP processor (powered by Groq)
 const processLocalNLP = async (messageText, sessionId) => {
   const text = messageText.toLowerCase().trim()
@@ -58,6 +76,17 @@ const processLocalNLP = async (messageText, sessionId) => {
   // 2. Check for manual hand-off requests
   if (text.includes('human') || text.includes('executive') || text.includes('agent') || text.includes('speak to') || text.includes('live support')) {
     return 'handoff'
+  }
+
+  // 2.5 Local Semantic Guardrails (Pre-LLM Filtering to save API cost)
+  const isConversational = ['hi', 'hello', 'hey', 'thanks', 'thank you', 'ok', 'okay', 'yes', 'no', 'hi there'].includes(text);
+  
+  if (!isConversational) {
+    const score = calculateRelevanceScore(text);
+    // If strongly negative (tech/math words), or 0 and long (random unrelated chatter)
+    if (score < 0 || (score === 0 && text.length > 20)) {
+      return "🌿 I am a dedicated MoolTrue Foods assistant. I can only help you with questions about our organic products, orders, and delivery. How can I assist you with our store today?";
+    }
   }
 
   // 3. Fallback to Groq LLM API
