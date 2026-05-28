@@ -3,7 +3,7 @@
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   color: var(--color-text-main);
-  padding: 1rem 1rem;
+  padding: 0.5rem 1rem;
   position: sticky;
   top: 0;
   z-index: 50;
@@ -42,7 +42,7 @@
 }
 
 .navbar-logo-img {
-  max-height: 45px;
+  max-height: 70px;
   width: auto;
   cursor: pointer;
   transition: transform var(--transition-bounce);
@@ -54,7 +54,7 @@
 
 @media (min-width: 640px) {
   .navbar-logo-img {
-    max-height: 55px;
+    max-height: 90px;
   }
 }
 

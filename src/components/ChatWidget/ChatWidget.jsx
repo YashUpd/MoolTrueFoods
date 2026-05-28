@@ -20,6 +20,7 @@ function ChatWidget() {
   const [viewingHistory, setViewingHistory] = useState(false)
   const [chatHistoryList, setChatHistoryList] = useState([])
   const [deletingHistoryToken, setDeletingHistoryToken] = useState(null)
+  const [isConfirmingClearAll, setIsConfirmingClearAll] = useState(false)
 
   const messagesEndRef = useRef(null)
   const isOpenRef = useRef(isOpen)
@@ -296,8 +297,44 @@ function ChatWidget() {
             {/* Previous Chats View */}
             {viewingHistory ? (
               <div className="mtf-chat-history history-view" style={{ backgroundColor: '#fff' }}>
-                <h4 style={{ margin: '0.5rem 0 1rem 0', padding: '0', color: '#1f2937' }}>Previous Chat Sessions</h4>
-                {chatHistoryList.length === 0 ? (
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', margin: '0.5rem 0 1rem 0' }}>
+                  <h4 style={{ margin: '0', padding: '0', color: '#1f2937' }}>Previous Chat Sessions</h4>
+                  {chatHistoryList.length > 0 && !isConfirmingClearAll && (
+                    <button 
+                      onClick={() => setIsConfirmingClearAll(true)}
+                      style={{ fontSize: '0.75rem', padding: '4px 8px', background: '#fee2e2', color: '#991b1b', border: 'none', borderRadius: '4px', cursor: 'pointer', fontWeight: 'bold' }}
+                    >
+                      Clear All
+                    </button>
+                  )}
+                </div>
+                {isConfirmingClearAll ? (
+                  <div style={{ background: '#fef2f2', padding: '1rem', borderRadius: '8px', border: '1px solid #fecaca', textAlign: 'center' }}>
+                    <p style={{ color: '#991b1b', fontWeight: 'bold', fontSize: '0.875rem', marginBottom: '1rem' }}>Are you sure you want to permanently delete all chat history?</p>
+                    <div style={{ display: 'flex', gap: '0.5rem', justifyContent: 'center' }}>
+                      <button 
+                        onClick={() => {
+                          localStorage.removeItem('mtf_chat_history');
+                          localStorage.removeItem('mtf_chat_token');
+                          setChatHistoryList([]);
+                          setSession(null);
+                          setMessages([]);
+                          setChatKey(prev => prev + 1);
+                          setIsConfirmingClearAll(false);
+                        }}
+                        style={{ background: '#ef4444', color: '#fff', border: 'none', padding: '6px 16px', borderRadius: '4px', fontSize: '0.75rem', fontWeight: 'bold', cursor: 'pointer' }}
+                      >
+                        Yes, Delete All
+                      </button>
+                      <button 
+                        onClick={() => setIsConfirmingClearAll(false)}
+                        style={{ background: 'transparent', color: '#991b1b', border: '1px solid #fca5a5', padding: '6px 16px', borderRadius: '4px', fontSize: '0.75rem', fontWeight: 'bold', cursor: 'pointer' }}
+                      >
+                        Cancel
+                      </button>
+                    </div>
+                  </div>
+                ) : chatHistoryList.length === 0 ? (
                   <p style={{ fontSize: '0.875rem', color: '#6b7280' }}>No previous chats found on this device.</p>
                 ) : (
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
@@ -341,7 +378,7 @@ function ChatWidget() {
                           <>
                             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.25rem' }}>
                               <div style={{ fontWeight: '600', fontSize: '0.875rem', color: '#111827' }}>
-                                Chat started {new Date(hist.date).toLocaleDateString()}
+                                Chat started {new Date(hist.date).toLocaleString([], { dateStyle: 'short', timeStyle: 'short' })}
                               </div>
                               <div style={{ fontSize: '0.75rem', color: '#6b7280' }}>
                                 ID: {hist.token.substring(0, 14)}...
