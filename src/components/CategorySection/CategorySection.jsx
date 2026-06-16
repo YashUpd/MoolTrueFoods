@@ -6,17 +6,17 @@ function CategorySection() {
   const categories = [
     {
       name: "Premium Spices",
-      image: "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?auto=format&fit=crop&w=800&q=80",
+      image: "/categories/premium_spices.png",
       link: "/shop?category=spices"
     },
     {
       name: "Pure Golden Ghee",
-      image: "https://images.unsplash.com/photo-1589154737229-b68e59275b1c?auto=format&fit=crop&w=800&q=80",
+      image: "/categories/golden_ghee.png",
       link: "/shop?category=ghee"
     },
     {
       name: "Organic Raw Honey",
-      image: "https://images.unsplash.com/photo-1587049352847-4d4b126a41f8?auto=format&fit=crop&w=800&q=80",
+      image: "/categories/raw_honey.png",
       link: "/shop?category=honey"
     }
   ];
