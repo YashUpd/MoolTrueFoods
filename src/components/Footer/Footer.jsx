@@ -71,14 +71,14 @@ function Footer() {
               
               <div className='footer-contact-details'>
                 <div>
-                  <p className='footer-contact-title'>MoolTrue Foods Pvt. Ltd.</p>
+                  <p className='footer-contact-title'>Mool True Foods LLP</p>
                 </div>
                 
                 <div className="footer-contact-item">
                   <FaMapMarkerAlt className="footer-contact-icon" size={12} />
                   <div>
                     <p className='footer-contact-text-label'>Head Office</p>
-                    <p className='footer-contact-text-val'>3rd Floor, B-63 Prashant Vihar<br />Road New Delhi 110085, India</p>
+                    <p className='footer-contact-text-val'>OFF -704, SS Omnia, Sector-86,<br />Gurugram, (HR) 122004</p>
                   </div>
                 </div>
 
@@ -87,27 +87,27 @@ function Footer() {
                   <div>
                     <p className='footer-contact-text-label'>Manufacturing Address</p>
                     <p className='footer-contact-text-val'>Khasra No.9/6, Village Joshi Jat<br />Tehsil Rai, Bahalagarh sonipat<br />haryana, Haryana 131021</p>
-                    <p className='footer-contact-text-val-fssai'>FSSAI License No -<br />10016064000917</p>
+                    <p className='footer-contact-text-val-fssai'>FSSAI License No -<br />Applied for</p>
                   </div>
                 </div>
 
                 <div className="footer-contact-item">
                   <FaEnvelope className="footer-contact-icon" size={12} />
-                  <a href='mailto:info@mooltrue.com' className='footer-contact-link'>
-                    info@mooltrue.com
+                  <a href='mailto:support@mooltruefoods.in' className='footer-contact-link'>
+                    support@mooltruefoods.in
                   </a>
                 </div>
 
                 <div className="footer-contact-item">
                   <FaPhone className="footer-contact-icon" size={12} />
-                  <a href='tel:01146370000' className='footer-contact-link'>
-                    011-4637-0000, 9090900040
+                  <a href='tel:8796443234' className='footer-contact-link'>
+                    8796443234
                   </a>
                 </div>
                 
                 <div className="footer-cin-container">
-                   <p className='footer-cin-label'>CIN Number -</p>
-                   <p className='footer-cin-val'>U15137DL2006PTC151221</p>
+                   <p className='footer-cin-label'>LLP No. -</p>
+                   <p className='footer-cin-val'>ACW-6923</p>
                 </div>
               </div>
             </div>

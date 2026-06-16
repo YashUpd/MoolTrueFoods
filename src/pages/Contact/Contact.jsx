@@ -35,15 +35,15 @@ function Contact() {
       title: "Suggestions & Complaints",
       icon: <FaComments size={42} className="text-[#194b82]" />,
       details: [
-        { type: "Email", info: "support@mooltrue.com" }
+        { type: "Email", info: "support@mooltruefoods.in" }
       ]
     },
     {
       title: "Product Query",
       icon: <FaQuestionCircle size={42} className="text-[#194b82]" />,
       details: [
-        { type: "Email", info: "info@mooltrue.com" },
-        { type: "Phone", info: "1800-123-4567" }
+        { type: "Email", info: "support@mooltruefoods.in" },
+        { type: "Phone", info: "8796443234" }
       ]
     }
   ];
@@ -99,8 +99,8 @@ function Contact() {
                 <div className="contact-detail-content">
                   <h4 className="contact-detail-heading">Head Office</h4>
                   <p className="contact-detail-text">
-                    3rd Floor, B-63 Prashant Vihar Road New Delhi<br />
-                    110085, India
+                    OFF -704, SS Omnia, Sector-86,<br />
+                    Gurugram, (HR) 122004
                   </p>
                 </div>
               </div>
@@ -124,8 +124,8 @@ function Contact() {
                 </div>
                 <div className="contact-detail-content">
                   <h4 className="contact-detail-heading">Email Us</h4>
-                  <a href="mailto:info@mooltrue.com" className="contact-detail-link">
-                    info@mooltrue.com
+                  <a href="mailto:support@mooltruefoods.in" className="contact-detail-link">
+                    support@mooltruefoods.in
                   </a>
                 </div>
               </div>
@@ -136,8 +136,8 @@ function Contact() {
                 </div>
                 <div className="contact-detail-content">
                   <h4 className="contact-detail-heading">Call Us</h4>
-                  <a href="tel:01146370000" className="contact-detail-link">
-                    011-4637-0000
+                  <a href="tel:8796443234" className="contact-detail-link">
+                    8796443234
                   </a>
                 </div>
               </div>
@@ -146,7 +146,7 @@ function Contact() {
                 <div>
                   <h4 className="contact-detail-heading">FSSAI License No</h4>
                   <p className="contact-detail-text">
-                    10016064000917
+                    Applied for
                   </p>
                 </div>
               </div>
