@@ -1,5 +1,5 @@
 .navbar {
-  background: var(--glass-bg);
+  background: #ffffff;
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   color: var(--color-text-main);
