@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route, Navigate, useLocation } from 'react-router-dom'
+import { useEffect } from 'react'
 import { GoogleOAuthProvider } from '@react-oauth/google'
 import { AnimatePresence, motion } from 'framer-motion'
 import Navbar from './components/Navbar/Navbar'
@@ -54,12 +55,22 @@ const PageTransition = ({ children }) => (
   </motion.div>
 )
 
+// Scroll to top on route change
+function ScrollToTop() {
+  const { pathname } = useLocation()
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [pathname])
+  return null
+}
+
 // Inner Routes Component to access useLocation
 function AnimatedRoutes() {
   const location = useLocation()
 
   return (
     <div className="app-container">
+      <ScrollToTop />
       <Navbar />
       <div className="app-main">
         <AnimatePresence mode="wait">
