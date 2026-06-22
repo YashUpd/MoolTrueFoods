@@ -13,6 +13,11 @@ import Checkout from './pages/Checkout/Checkout'
 import Login from './pages/Login/Login'
 import Wishlist from './pages/Wishlist/Wishlist'
 import Manufacturer from './pages/Manufacturer/Manufacturer'
+import TermsConditions from './pages/Policies/TermsConditions'
+import PrivacyPolicy from './pages/Policies/PrivacyPolicy'
+import ShippingPolicy from './pages/Policies/ShippingPolicy'
+import ReturnPolicy from './pages/Policies/ReturnPolicy'
+import CSR from './pages/CSR/CSR'
 import { CartProvider } from './context/CartContext'
 import { WishlistProvider } from './context/WishlistContext'
 import { AuthProvider, useAuth } from './context/AuthContext'
@@ -81,6 +86,11 @@ function AnimatedRoutes() {
             <Route path="/contact" element={<PageTransition><Contact /></PageTransition>} />
             <Route path="/wishlist" element={<PageTransition><Wishlist /></PageTransition>} />
             <Route path="/manufacturer" element={<PageTransition><Manufacturer /></PageTransition>} />
+            <Route path="/terms" element={<PageTransition><TermsConditions /></PageTransition>} />
+            <Route path="/privacy" element={<PageTransition><PrivacyPolicy /></PageTransition>} />
+            <Route path="/shipping" element={<PageTransition><ShippingPolicy /></PageTransition>} />
+            <Route path="/return-policy" element={<PageTransition><ReturnPolicy /></PageTransition>} />
+            <Route path="/csr" element={<PageTransition><CSR /></PageTransition>} />
             <Route path="/product/:id" element={<PageTransition><ProductDetails /></PageTransition>} />
             <Route path="/login" element={<PageTransition><Login /></PageTransition>} />
             <Route

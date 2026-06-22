@@ -50,8 +50,8 @@ function Footer() {
                 <li><Link to='/about' className='footer-link'>About Us</Link></li>
                 <li><Link to='/contact' className='footer-link'>Contact Us</Link></li>
                 <li><Link to='/manufacturer' className='footer-link'>Manufacturing Unit</Link></li>
-                <li><Link to='#' className='footer-link'>Return / Exchange</Link></li>
-                <li><Link to='#' className='footer-link'>CSR</Link></li>
+                <li><Link to='/return-policy' className='footer-link'>Return / Exchange</Link></li>
+                <li><Link to='/csr' className='footer-link'>CSR</Link></li>
               </ul>
             </div>
 
@@ -59,10 +59,10 @@ function Footer() {
             <div>
               <h3 className='footer-column-heading'>Customer Services</h3>
               <ul className='footer-links-list'>
-                <li><Link to='#' className='footer-link'>Terms & Conditions</Link></li>
-                <li><Link to='#' className='footer-link'>Privacy Policy</Link></li>
-                <li><Link to='#' className='footer-link'>Shipping Policy</Link></li>
-                <li><Link to='#' className='footer-link'>Return Policy</Link></li>
+                <li><Link to='/terms' className='footer-link'>Terms & Conditions</Link></li>
+                <li><Link to='/privacy' className='footer-link'>Privacy Policy</Link></li>
+                <li><Link to='/shipping' className='footer-link'>Shipping Policy</Link></li>
+                <li><Link to='/return-policy' className='footer-link'>Return Policy</Link></li>
               </ul>
             </div>
 
