@@ -11,6 +11,7 @@ import ProductDetails from './pages/ProductDetails/ProductDetails'
 import Checkout from './pages/Checkout/Checkout'
 import Login from './pages/Login/Login'
 import Wishlist from './pages/Wishlist/Wishlist'
+import Manufacturer from './pages/Manufacturer/Manufacturer'
 import { CartProvider } from './context/CartContext'
 import { WishlistProvider } from './context/WishlistContext'
 import { AuthProvider, useAuth } from './context/AuthContext'
@@ -68,6 +69,7 @@ function AnimatedRoutes() {
             <Route path="/about" element={<PageTransition><About /></PageTransition>} />
             <Route path="/contact" element={<PageTransition><Contact /></PageTransition>} />
             <Route path="/wishlist" element={<PageTransition><Wishlist /></PageTransition>} />
+            <Route path="/manufacturer" element={<PageTransition><Manufacturer /></PageTransition>} />
             <Route path="/product/:id" element={<PageTransition><ProductDetails /></PageTransition>} />
             <Route path="/login" element={<PageTransition><Login /></PageTransition>} />
             <Route

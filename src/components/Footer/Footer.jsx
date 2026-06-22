@@ -49,6 +49,7 @@ function Footer() {
               <ul className='footer-links-list'>
                 <li><Link to='/about' className='footer-link'>About Us</Link></li>
                 <li><Link to='/contact' className='footer-link'>Contact Us</Link></li>
+                <li><Link to='/manufacturer' className='footer-link'>Manufacturing Unit</Link></li>
                 <li><Link to='#' className='footer-link'>Return / Exchange</Link></li>
                 <li><Link to='#' className='footer-link'>CSR</Link></li>
               </ul>
@@ -86,8 +87,9 @@ function Footer() {
                   <FaMapMarkerAlt className="footer-contact-icon" size={12} />
                   <div>
                     <p className='footer-contact-text-label'>Manufacturing Address</p>
-                    <p className='footer-contact-text-val'>Khasra No.9/6, Village Joshi Jat<br />Tehsil Rai, Bahalagarh sonipat<br />haryana, Haryana 131021</p>
-                    <p className='footer-contact-text-val-fssai'>FSSAI License No -<br />Applied for</p>
+                    <p className='footer-contact-text-val' style={{ fontWeight: 600 }}>GOODLIFE FOODS CORP<br />(Emaart India Corp)</p>
+                    <p className='footer-contact-text-val'>Plot No. 1196, Block C, SGM Nagar,<br />NIT Faridabad, Faridabad,<br />Haryana – 121001</p>
+                    <p className='footer-contact-text-val-fssai'>FSSAI License No -<br />10823003000548</p>
                   </div>
                 </div>
 

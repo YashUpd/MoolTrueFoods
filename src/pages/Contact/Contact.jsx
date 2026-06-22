@@ -111,9 +111,12 @@ function Contact() {
                 </div>
                 <div className="contact-detail-content">
                   <h4 className="contact-detail-heading">Manufacturing Address</h4>
+                  <p className="contact-detail-text" style={{ fontWeight: 600, marginBottom: '0.25rem' }}>
+                    GOODLIFE FOODS CORP (Emaart India Corp)
+                  </p>
                   <p className="contact-detail-text">
-                    Khasra No.9/6, Village Joshi Jat Tehsil Rai,<br />
-                    Bahalagarh sonipat haryana, Haryana 131021
+                    Plot No. 1196, Block C, SGM Nagar,<br />
+                    NIT Faridabad, Faridabad, Haryana – 121001
                   </p>
                 </div>
               </div>
@@ -146,7 +149,7 @@ function Contact() {
                 <div>
                   <h4 className="contact-detail-heading">FSSAI License No</h4>
                   <p className="contact-detail-text">
-                    Applied for
+                    10823003000548
                   </p>
                 </div>
               </div>
